@@ -25,7 +25,7 @@ To test you could type, for instance `sleep 15`, and start using other app. Afte
 
 ## Compatibility
 
-Implemented using fish_right_prompt, so it can be used together with other fish_prompt packages. Except if they also user a fish_right_prompt.
+Implemented using fish_right_prompt, so it can be used together with other fish_prompt packages. Except if they already use fish_right_prompt.
 
 ## Support
 - OS X 10.8+: Notification Center
