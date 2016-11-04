@@ -5,8 +5,15 @@ A [fish](https://fishshell.com/) plug-in to automatically get notified when long
 ## Install
 
 
-- With [Fisherman](http://fisherman.sh/): `fisher done`
-- Manually: `curl -Lo ~/.config/fish/functions/fish_right_prompt.fish --create-dirs raw.githubusercontent.com/fisherman/done/master/fish_right_prompt.fish`
+#### Using [Fisherman](http://fisherman.sh/):
+```
+fisher install done
+```
+
+#### Manually:
+```
+curl -Lo ~/.config/fish/functions/fish_right_prompt.fish --create-dirs raw.githubusercontent.com/fisherman/done/master/fish_right_prompt.fish
+```
 
 
 ## Usage
