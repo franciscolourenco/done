@@ -5,7 +5,7 @@ A [fish](https://fishshell.com/) plug-in to automatically get notified when long
 ## Install
 
 
-#### Using [Fisherman](http://fisherman.sh/):
+#### Using [fisherman](http://fisherman.sh/):
 ```
 fisher install done
 ```
