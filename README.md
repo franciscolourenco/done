@@ -1,4 +1,4 @@
-# Done
+# done
 
 A [fish](https://fishshell.com/) plug-in to automatically get notified when long processes are finished.
 
