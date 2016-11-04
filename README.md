@@ -1,6 +1,6 @@
 # done
 
-A [fish](https://fishshell.com/) plug-in to automatically get notified when long processes are finished.
+A [fish](https://fishshell.com/) plug-in to automatically get notified when long processes finish.
 
 ## Install
 
@@ -18,7 +18,7 @@ curl -Lo ~/.config/fish/functions/fish_right_prompt.fish --create-dirs raw.githu
 
 ## Usage
 
-Just go on with your normal life. You will get a notification when processes which take longer than 10 seconds finish, if the terminal window is in the background.
+Just go on with your normal life. You will get a notification when a process takes more than 10 seconds finish, and the terminal window not in the foreground.
 Customizing these settings may be supported in the future.
 
 To test you could type, for instance `sleep 15`, and start using other app. After 15 seconds you should get a notification.
