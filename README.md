@@ -5,25 +5,20 @@ A [fish](https://fishshell.com/) plug-in to automatically get notified when long
 ## Install
 
 
-### With [Fisherman](http://fisherman.sh/)
-```
-fisher done
-```
+- With [Fisherman](http://fisherman.sh/): `fisher done`
+- Manually: `curl -Lo ~/.config/fish/functions/fish_right_prompt.fish --create-dirs raw.githubusercontent.com/fisherman/done/master/fish_right_prompt.fish`
 
-### Manually
-
-```
-curl -Lo ~/.config/fish/functions/fish_right_prompt.fish --create-dirs raw.githubusercontent.com/fisherman/done/master/fish_right_prompt.fish
-```
 
 ## Usage
 
 Just go on with your normal life. You will get a notification when processes which take longer than 10 seconds finish, if the terminal window is in the background.
 Customizing these settings may be supported in the future.
 
+To test you could type, for instance `sleep 15`, and start using other app. After 15 seconds you should get a notification.
+
 ## Compatibility
 
-Implemented using fish_right_prompt, so it can be used together with other fish_prompt packages. Except if they also implement a fish_right_prompt.
+Implemented using fish_right_prompt, so it can be used together with other fish_prompt packages. Except if they also user a fish_right_prompt.
 
 ## Support
 - OS X 10.8+: Notification Center
