@@ -2,9 +2,6 @@
 
 A [fish](https://fishshell.com/) plug-in to automatically get notified when long processes are finished.
 
-By default it only shows notifications for processes which take longer than 10 seconds, and if the terminal window is in the background.
-Customizing the defaults might be supported in the future
-
 ## Install
 
 
@@ -18,6 +15,11 @@ fisher done
 ```
 curl -Lo ~/.config/fish/functions/fish_right_prompt.fish --create-dirs raw.githubusercontent.com/fisherman/done/master/fish_right_prompt.fish
 ```
+
+## Usage
+
+Just go on with your normal life. You will get a notification when processes which take longer than 10 seconds finish, if the terminal window is in the background.
+Customizing these settings may be supported in the future.
 
 ## Compatibility
 
