@@ -8,6 +8,11 @@
 
 <h4 align="center">A <a href="https://fishshell.com/">fish</a> plugin to automatically receive a notification when long processes finish.</h4>
 
+<p align="center">
+  <img src="https://img.shields.io/badge/stability-experimental-orange.svg" alt="Stability: Experimental">
+  <img src="https://img.shields.io/badge/fisherman-v0.1-blue.svg" alt="v0.1">
+</p>
+<br>
 
 Just go on with your normal life. You will get a notification when a process takes more than 10 seconds finish, and the terminal window not in the foreground.
 Customizing these settings may be supported in the future.
