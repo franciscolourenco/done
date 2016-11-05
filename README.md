@@ -9,6 +9,13 @@
 <h4 align="center">A <a href="https://fishshell.com/">fish</a> plugin to automatically receive a notification when long processes finish.</h4>
 
 
+Just go on with your normal life. You will get a notification when a process takes more than 10 seconds finish, and the terminal window not in the foreground.
+Customizing these settings may be supported in the future.
+
+To test you could type, for instance `sleep 15`, and start using other app. After 15 seconds you should get a notification.
+
+
+
 ## Install
 
 
@@ -21,14 +28,6 @@ fisher install done
 ```
 curl -Lo ~/.config/fish/functions/fish_right_prompt.fish --create-dirs raw.githubusercontent.com/fisherman/done/master/fish_right_prompt.fish
 ```
-
-
-## Usage
-
-Just go on with your normal life. You will get a notification when a process takes more than 10 seconds finish, and the terminal window not in the foreground.
-Customizing these settings may be supported in the future.
-
-To test you could type, for instance `sleep 15`, and start using other app. After 15 seconds you should get a notification.
 
 ## Compatibility
 
