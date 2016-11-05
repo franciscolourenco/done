@@ -6,7 +6,7 @@
   <br>
 </h1>
 
-<h4 align="center">A [fish](https://fishshell.com/) plug-in to automatically get notified when long processes finish.</h4>
+<h4 align="center">A <a href="https://fishshell.com/">fish</a> plugin to automatically receive a notification when long processes finish.</h4>
 
 
 ## Install
