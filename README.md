@@ -1,6 +1,13 @@
-# done
+<h1 align="center">
+  <img src="https://i.imgur.com/9g65EYq.png" alt="done" width="200"></a>
+  <br>
+  Done
+  <br>
+  <br>
+</h1>
 
-A [fish](https://fishshell.com/) plug-in to automatically get notified when long processes finish.
+<h4 align="center">A [fish](https://fishshell.com/) plug-in to automatically get notified when long processes finish.</h4>
+
 
 ## Install
 
