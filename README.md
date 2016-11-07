@@ -31,10 +31,6 @@ fisher install done
 curl -Lo ~/.config/fish/functions/fish_right_prompt.fish --create-dirs raw.githubusercontent.com/fisherman/done/master/fish_right_prompt.fish
 ```
 
-## Compatibility
-
-Implemented using fish_right_prompt, so it can be used together with other fish_prompt packages. **Except if they already use fish_right_prompt.**
-
 ## Support
 - OS X 10.8+: Notification Center
 - Linux: Planned
