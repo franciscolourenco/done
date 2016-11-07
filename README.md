@@ -7,7 +7,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/stability-experimental-orange.svg" alt="Stability: Experimental">
-  <img src="https://img.shields.io/badge/fisherman-v0.1-blue.svg" alt="v0.1">
+  <img src="https://img.shields.io/badge/fisherman-v0.2.1-blue.svg" alt="v0.2.1">
 </p>
 <br>
 
