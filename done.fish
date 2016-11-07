@@ -1,4 +1,4 @@
-function _done --on-event fish_prompt
+function done --on-event fish_prompt
 	if test $CMD_DURATION
 		# Store duration of last command
 		set duration (echo "$CMD_DURATION 1000" | awk '{printf "%.3fs", $1 / $2}')
