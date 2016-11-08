@@ -36,6 +36,11 @@ curl -Lo ~/.config/fish/functions/_done.fish --create-dirs raw.githubusercontent
 - Linux: Planned
 - Windows: Planned
 
+## Contributors
+- [Francisco Lourenço](https://github.com/aristidesfl/) - Maintainer
+- [Daniel Wehner](https://dawehner.github.io/) - Concept
+- [Thanh Duc Nguyen](http://iamthanh.com/) - Logo
+
 ## License
 MIT License
 
