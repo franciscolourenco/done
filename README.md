@@ -28,7 +28,7 @@ fisher install done
 
 #### Manually:
 ```
-curl -Lo ~/.config/fish/functions/fish_right_prompt.fish --create-dirs raw.githubusercontent.com/fisherman/done/master/_done.fish
+curl -Lo ~/.config/fish/functions/_done.fish --create-dirs raw.githubusercontent.com/fisherman/done/master/_done.fish
 ```
 
 ## Support
