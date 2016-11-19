@@ -5,7 +5,7 @@ function _done --on-event fish_prompt
 
 		# OS X notification when a command takes longer than notify_duration
 		set notify_duration 10000
-		set exclude_cmd "zsh|bash|less|man|more|ssh|drush php"
+		set exclude_cmd "zsh|bash|less|man|more|ssh|drush php|git add|vim"
 		if begin
 				test $CMD_DURATION -gt $notify_duration
 				and echo $history[1] | grep -vqE "^($exclude_cmd).*"
