@@ -33,7 +33,7 @@ curl -Lo ~/.config/fish/functions/_done.fish --create-dirs raw.githubusercontent
 
 ## Support
 - OS X 10.8+: Notification Center
-- Linux: Planned
+- Linux: `notify-send`, provided on Ubuntu by `libnotify-bin`.
 - Windows: Planned
 
 ## Contributors
