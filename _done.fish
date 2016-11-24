@@ -1,6 +1,6 @@
 function _done --on-event fish_prompt
 	set -l platform
-	set -l terminals "tmux|iTerm"
+	set -l terminals "termite|gnome-terminal|iTerm"
 
 	if command -s tell > /dev/null
 		set platform osx
@@ -35,7 +35,7 @@ function _done --on-event fish_prompt
 						end tell
 						" | osascript
 				case linux
-					set active_window (xprop -id (xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2) _NET_WM_NAME)
+					set active_application (xprop -id (xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2) WM_CLASS)
 					if echo $active_window | grep -vqE $terminals
 						notify-send "Finished in $duration with title $history[1]"
 					end
