@@ -1,5 +1,6 @@
 function _done --on-event fish_prompt
 	set -l platform
+	set -l terminals "termite|gnome-terminal|iTerm"
 
 	if command -s tell > /dev/null
 		set platform osx
@@ -24,17 +25,20 @@ function _done --on-event fish_prompt
 
 			switch $platform
 				case osx
-					# Only show the notification if iTerm is not focused
+					# Only show the notification if terminal is not focused
 					echo "
 						tell application \"System Events\"
 							set activeApp to name of first application process whose frontmost is true
-							if \"iTerm\" is not in activeApp then
+							if \"$terminals\" is not in activeApp then
 								display notification \"Finished in $duration\" with title \"$history[1]\"
 							end if
 						end tell
 						" | osascript
 				case linux
-					notify-send "Finished in $duration with title $history[1]"
+					set active_application (xprop -id (xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2) WM_CLASS)
+					if echo $active_window | grep -vqE $terminals
+						notify-send "Finished in $duration with title $history[1]"
+					end
 			end
 		end
 	end
