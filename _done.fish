@@ -1,20 +1,10 @@
 function _done --on-event fish_prompt
-	set -l platform
-
-	if command -s tell > /dev/null
-		set platform osx
-	else if command -s notify-send > /dev/null
-		set platform linux
-	else
-		echo "fisherman/done: could not detect your platform."
-		return 1
-	end
 
 	if test $CMD_DURATION
 		# Store duration of last command
 		set duration (echo "$CMD_DURATION 1000" | awk '{printf "%.3fs", $1 / $2}')
 
-		# OS X notification when a command takes longer than notify_duration
+		# when a command takes longer than notify_duration
 		set notify_duration 10000
 		set exclude_cmd "zsh|bash|less|man|more|ssh|drush php|git add|vim"
 		if begin
@@ -22,9 +12,8 @@ function _done --on-event fish_prompt
 				and echo $history[1] | grep -vqE "^($exclude_cmd).*"
 			end
 
-			switch $platform
-				case osx
-					# Only show the notification if iTerm is not focused
+			switch (uname)
+				case Darwin # macOS
 					echo "
 						tell application \"System Events\"
 							set activeApp to name of first application process whose frontmost is true
@@ -33,8 +22,11 @@ function _done --on-event fish_prompt
 							end if
 						end tell
 						" | osascript
-				case linux
+				case Linux
 					notify-send "Finished in $duration with title $history[1]"
+        case "*"
+          # bell sound
+          echo -e "\a"
 			end
 		end
 	end
