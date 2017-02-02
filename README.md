@@ -7,7 +7,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/stability-experimental-orange.svg" alt="Stability: Experimental">
-  <img src="https://img.shields.io/badge/fisherman-v0.3.0-blue.svg" alt="v0.3.0">
+  <img src="https://img.shields.io/badge/fisherman-v0.4.0-blue.svg" alt="v0.4.0">
 </p>
 <br>
 
@@ -32,8 +32,8 @@ curl -Lo ~/.config/fish/functions/_done.fish --create-dirs raw.githubusercontent
 ```
 
 ## Support
-- OS X 10.8+: Notification Center
-- Linux: `notify-send`, provided on Ubuntu by `libnotify-bin`.
+- macOS 10.8+ via Notification Center. For notification with icons, please `brew install terminal-notifier`.
+- Linux via `notify-send`, provided on Ubuntu by `libnotify-bin`. Otherwise bell sound is played.
 - Windows: Planned
 
 ## Contributors
