@@ -31,7 +31,14 @@ fisher install done
 curl -Lo ~/.config/fish/functions/_done.fish --create-dirs raw.githubusercontent.com/fisherman/done/master/_done.fish
 ```
 
+## Update
+
+```
+fisher update
+```
+
 ## Support
+- fish 2.2.0+
 - macOS 10.8+ via Notification Center. For notification with icons, please `brew install terminal-notifier`.
 - Linux via `notify-send`, provided on Ubuntu by `libnotify-bin`. Otherwise bell sound is played.
 - Windows: Planned
