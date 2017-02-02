@@ -37,6 +37,8 @@ curl -Lo ~/.config/fish/functions/_done.fish --create-dirs raw.githubusercontent
 fisher update
 ```
 
+[Subscribe](http://eepurl.com/cAcU3P) to be notified on updates.
+
 ## Support
 - fish 2.2.0+
 - macOS 10.8+ via Notification Center. For notification with icons, please `brew install terminal-notifier`.
