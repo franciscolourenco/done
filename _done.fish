@@ -60,8 +60,8 @@ function _done --on-event fish_prompt
 				and echo $history[1] | grep -vqE "^($exclude_cmd).*"
 			end
 
-			set -l message "Finished in $duration"
-			set -l title "$history[1]"
+			set -l title "Finished in $duration"
+			set -l message "$history[1]"
 
 			if test (uname) = 'Darwin' # macOS
 				if not _is_terminal_focused
