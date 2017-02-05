@@ -73,7 +73,7 @@ function _done --on-event fish_prompt
 				end
 
 			else if _is_command_available notify-send # linux
-				notify-send "Finished in $duration with title $history[1]"
+				notify-send --icon=terminal --app-name=terminal "$title" "$message"
 
 			else # anything else
       	echo -e "\a" # bell sound
