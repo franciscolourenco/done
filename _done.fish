@@ -29,7 +29,7 @@ function _get_window_id
 	if _is_available lsappinfo
 		lsappinfo info -only bundleID (lsappinfo front) | cut -d '"' -f4
 	else if _is_available xprop
-		xprop -id (xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2) _NET_WM_NAME | cut -d "\"" -f 2
+		xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2
 	end
 
 end
