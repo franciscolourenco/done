@@ -52,11 +52,9 @@ function _done --on-event fish_prompt
 		# Store duration of last command
 		set duration (echo "$CMD_DURATION 1000" | awk '{printf "%.3fs", $1 / $2}')
 		set notify_duration 10000
-		set exclude_cmd "zsh|bash|less|man|more|ssh|drush php|git add|vim"
 
 		if begin
 				test $CMD_DURATION -gt $notify_duration  # longer than notify_duration
-				and echo $history[1] | grep -vqE "^($exclude_cmd).*" # not excluded command
 				and not _is_terminal_focused  # terminal or window not in foreground
 			end
 
