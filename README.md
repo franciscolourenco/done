@@ -6,8 +6,8 @@
 <h4 align="center">A <a href="https://fishshell.com/">fish</a> plugin to automatically receive a notification when long processes finish.</h4>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/stability-experimental-orange.svg" alt="Stability: Experimental">
-  <img src="https://img.shields.io/badge/fisherman-v0.4.0-blue.svg" alt="v0.4.0">
+  <img src="https://img.shields.io/badge/stability-stable-green.svg" alt="Stability: Stable">
+  <img src="https://img.shields.io/badge/fisherman-v0.5.0-blue.svg" alt="v0.5.0">
 </p>
 <br>
 
@@ -41,9 +41,9 @@ fisher update
 
 ## Support
 - fish 2.2.0+
-- macOS 10.8+ via Notification Center. For notification with icons, please `brew install terminal-notifier`.
-- Linux via `notify-send`, provided on Ubuntu by `libnotify-bin`. Otherwise bell sound is played.
-- Windows: Planned
+- macOS 10.8+ via Notification Center. For notification with icons, please `brew install terminal-notifier`. Tab detection not supported for now.
+- Linux via `notify-send`. Otherwise bell sound is played. Window detection supported.
+- Windows: Upvote https://github.com/fisherman/done/issues/5 if interested.
 
 ## Contributors
 - [Francisco Lourenço](https://github.com/aristidesfl/) - Maintainer
