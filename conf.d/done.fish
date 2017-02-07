@@ -23,31 +23,22 @@
 # done v0.5.0
 
 
-set _initial_window_id ''
+set __done_initial_window_id ''
 
-function _get_window_id
-	if _is_available lsappinfo
+function __done_get_window_id
+	if type -q $argv lsappinfo
 		lsappinfo info -only bundleID (lsappinfo front) | cut -d '"' -f4
-	else if _is_available xprop
+	else if type -q $argv xprop
 		xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2
 	end
 
 end
 
-function _is_terminal_focused
-	test $_initial_window_id = (_get_window_id)
+function __done_started --on-event fish_preexec
+	set _initial_window_id (__done_get_window_id)
 end
 
-function _is_available
-	type -q $argv
-end
-
-function _started --on-event fish_preexec
-	set _initial_window_id (_get_window_id)
-end
-
-function _done --on-event fish_prompt
-
+function __done_ended --on-event fish_prompt
 	if test $CMD_DURATION
 		# Store duration of last command
 		set duration (echo "$CMD_DURATION 1000" | awk '{printf "%.3fs", $1 / $2}')
@@ -55,19 +46,19 @@ function _done --on-event fish_prompt
 
 		if begin
 				test $CMD_DURATION -gt $notify_duration  # longer than notify_duration
-				and not _is_terminal_focused  # terminal or window not in foreground
+				and test $_initial_window_id != (__done_get_window_id)  # terminal or window not in foreground
 			end
 
 			set -l title "Finished in $duration"
 			set -l message "$history[1]"
 
-			if _is_available terminal-notifier  # https://github.com/julienXX/terminal-notifier
+			if type -q $argv terminal-notifier  # https://github.com/julienXX/terminal-notifier
 				terminal-notifier -message "$message" -title "$title" -sender "$_initial_window_id"
 
-			else if _is_available osascript  # AppleScript
+			else if type -q $argv osascript  # AppleScript
 				osascript -e "display notification \"$message\" with title \"$title\""
 
-			else if _is_available notify-send # Linux notify-send
+			else if type -q $argv notify-send # Linux notify-send
 				notify-send --icon=terminal --app-name=terminal "$title" "$message"
 
 			else  # anything else

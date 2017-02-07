@@ -40,7 +40,7 @@ fisher update
 [Subscribe](http://eepurl.com/cAcU3P) to be notified on updates.
 
 ## Support
-- fish 2.2.0+
+- fish 2.3.0+
 - macOS 10.8+ via Notification Center. For notification with icons, please `brew install terminal-notifier`. Tab detection not supported for now.
 - Linux via `notify-send`. Otherwise bell sound is played. Window detection supported.
 - Windows: Upvote https://github.com/fisherman/done/issues/5 if interested.
