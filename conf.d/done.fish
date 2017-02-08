@@ -26,9 +26,9 @@
 set __done_initial_window_id ''
 
 function __done_get_window_id
-	if type -q $argv lsappinfo
+	if type -q lsappinfo
 		lsappinfo info -only bundleID (lsappinfo front) | cut -d '"' -f4
-	else if type -q $argv xprop
+	else if type -q xprop
 		xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2
 	end
 
@@ -52,13 +52,13 @@ function __done_ended --on-event fish_prompt
 			set -l title "Finished in $duration"
 			set -l message "$history[1]"
 
-			if type -q $argv terminal-notifier  # https://github.com/julienXX/terminal-notifier
+			if type -q terminal-notifier  # https://github.com/julienXX/terminal-notifier
 				terminal-notifier -message "$message" -title "$title" -sender "$__done_initial_window_id"
 
-			else if type -q $argv osascript  # AppleScript
+			else if type -q osascript  # AppleScript
 				osascript -e "display notification \"$message\" with title \"$title\""
 
-			else if type -q $argv notify-send # Linux notify-send
+			else if type -q notify-send # Linux notify-send
 				notify-send --icon=terminal --app-name=terminal "$title" "$message"
 
 			else  # anything else
