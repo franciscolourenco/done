@@ -35,7 +35,7 @@ function __done_get_window_id
 end
 
 function __done_started --on-event fish_preexec
-	set _initial_window_id (__done_get_window_id)
+	set __done_initial_window_id (__done_get_window_id)
 end
 
 function __done_ended --on-event fish_prompt
@@ -46,14 +46,14 @@ function __done_ended --on-event fish_prompt
 
 		if begin
 				test $CMD_DURATION -gt $notify_duration  # longer than notify_duration
-				and test $_initial_window_id != (__done_get_window_id)  # terminal or window not in foreground
+				and test $__done_initial_window_id != (__done_get_window_id)  # terminal or window not in foreground
 			end
 
 			set -l title "Finished in $duration"
 			set -l message "$history[1]"
 
 			if type -q $argv terminal-notifier  # https://github.com/julienXX/terminal-notifier
-				terminal-notifier -message "$message" -title "$title" -sender "$_initial_window_id"
+				terminal-notifier -message "$message" -title "$title" -sender "$__done_initial_window_id"
 
 			else if type -q $argv osascript  # AppleScript
 				osascript -e "display notification \"$message\" with title \"$title\""
