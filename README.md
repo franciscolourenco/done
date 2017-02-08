@@ -7,7 +7,9 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/stability-stable-green.svg" alt="Stability: Stable">
-  <img src="https://img.shields.io/badge/fisherman-v1.0.0-blue.svg" alt="v1.0.0">
+  <img src="https://img.shields.io/github/release/fisherman/done.svg" alt="fish >=2.3.0">
+  <img src="https://img.shields.io/badge/fish->=2.3.0-orange.svg" alt="fish >=2.3.0">
+  <img src="https://img.shields.io/badge/license-MIT-lightgray.svg" alt="License: MIT">
 </p>
 <br>
 
