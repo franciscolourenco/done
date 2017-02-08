@@ -3,7 +3,7 @@
   <br>
 </h1>
 
-<h4 align="center">A <a href="https://fishshell.com/">fish</a> plugin to automatically receive a notification when long processes finish.</h4>
+<h4 align="center">A <a href="https://fishshell.com/">fish</a> plugin to automatically receive notifications when long processes finish.</h4>
 
 <p align="center">
   <img src="https://img.shields.io/badge/stability-stable-green.svg" alt="Stability: Stable">
