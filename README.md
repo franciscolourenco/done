@@ -30,7 +30,7 @@ fisher install done
 
 #### Manually:
 ```
-curl -Lo ~/.config/fish/functions/_done.fish --create-dirs raw.githubusercontent.com/fisherman/done/master/_done.fish
+curl -Lo ~/.config/fish/conf.d/done.fish --create-dirs raw.githubusercontent.com/fisherman/done/master/conf.d/done.fish
 ```
 
 ## Update
