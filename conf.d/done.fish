@@ -41,7 +41,7 @@ end
 function __done_ended --on-event fish_prompt
 	if test $CMD_DURATION
 		# Store duration of last command
-		set duration (echo "$CMD_DURATION 1000" | awk '{printf "%.3fs", $1 / $2}')
+		set duration (echo "$CMD_DURATION" | humanize_duration)
 		set notify_duration 10000
 
 		if begin
