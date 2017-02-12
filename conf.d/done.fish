@@ -39,6 +39,11 @@ function __done_started --on-event fish_preexec
 end
 
 function __done_ended --on-event fish_prompt
+	set -l errors false
+	if test $status -ne 0
+		set errors true
+	end
+
 	if test $CMD_DURATION
 		# Store duration of last command
 		set duration (echo "$CMD_DURATION" | humanize_duration)
@@ -51,6 +56,10 @@ function __done_ended --on-event fish_prompt
 
 			set -l title "Finished in $duration"
 			set -l message "$history[1]"
+
+			if test $errors = true
+				set title "$title with errors"
+			end
 
 			if type -q terminal-notifier  # https://github.com/julienXX/terminal-notifier
 				terminal-notifier -message "$message" -title "$title" -sender "$__done_initial_window_id"
