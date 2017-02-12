@@ -54,11 +54,11 @@ function __done_ended --on-event fish_prompt
 				and test $__done_initial_window_id != (__done_get_window_id)  # terminal or window not in foreground
 			end
 
-			set -l title "Finished in $duration"
+			set -l title "Done in $duration"
 			set -l message "$history[1]"
 
 			if test $errors = true
-				set title "$title with errors"
+				set title "Overcooked after $duration"
 			end
 
 			if type -q terminal-notifier  # https://github.com/julienXX/terminal-notifier
