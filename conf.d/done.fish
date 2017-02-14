@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# done v1.1.0
+# done v1.2.0
 
 
 set __done_initial_window_id ''
