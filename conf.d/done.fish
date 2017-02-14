@@ -39,10 +39,7 @@ function __done_started --on-event fish_preexec
 end
 
 function __done_ended --on-event fish_prompt
-	set -l errors false
-	if test $status -ne 0
-		set errors true
-	end
+	set -l exit_status $status
 
 	if test $CMD_DURATION
 		# Store duration of last command
@@ -57,8 +54,8 @@ function __done_ended --on-event fish_prompt
 			set -l title "Done in $duration"
 			set -l message "$history[1]"
 
-			if test $errors = true
-				set title "Overcooked after $duration"
+			if test $exit_status -ne 0
+				set title "Exit status $exit_status after $duration"
 			end
 
 			if type -q terminal-notifier  # https://github.com/julienXX/terminal-notifier
