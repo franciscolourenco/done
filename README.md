@@ -47,7 +47,7 @@ fisher update
 - Linux via `notify-send`. Otherwise bell sound is played. Window detection supported.
 - Windows: Upvote https://github.com/fisherman/done/issues/5 if interested.
 
-## Contributors
+## Credits
 - [Francisco Lourenço](https://github.com/aristidesfl/) - Maintainer
 - [Daniel Wehner](https://dawehner.github.io/) - Proof of Concept
 - [Thanh Duc Nguyen](http://iamthanh.com/) - Logo
