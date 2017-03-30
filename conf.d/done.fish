@@ -55,7 +55,7 @@ function __done_ended --on-event fish_prompt
 			set -l message "$history[1]"
 
 			if test $exit_status -ne 0
-				set title "Exit status $exit_status after $duration"
+				set title "Exited ($exit_status) after $duration"
 			end
 
 			if type -q terminal-notifier  # https://github.com/julienXX/terminal-notifier
