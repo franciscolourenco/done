@@ -23,7 +23,7 @@
 # done v1.2.1
 
 
-set __done_initial_window_id ''
+set -g __done_initial_window_id ''
 
 function __done_get_window_id
 	if type -q lsappinfo
