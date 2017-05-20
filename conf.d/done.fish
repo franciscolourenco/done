@@ -23,8 +23,6 @@
 # done v1.2.2
 
 
-set -g __done_initial_window_id ''
-
 function __done_get_window_id
 	if type -q lsappinfo
 		lsappinfo info -only bundleID (lsappinfo front) | cut -d '"' -f4
@@ -33,41 +31,50 @@ function __done_get_window_id
 	end
 end
 
-function __done_started --on-event fish_preexec
-	set __done_initial_window_id (__done_get_window_id)
-end
 
-function __done_ended --on-event fish_prompt
-	set -l exit_status $status
+# verify that the system has graphical capabilites before initializing
+if test -z "$SSH_CLIENT"  # not over ssh
+and test -n __done_get_window_id  # is able to get window id
 
-	if test $CMD_DURATION
-		# Store duration of last command
-		set duration (echo "$CMD_DURATION" | humanize_duration)
-		set notify_duration 10000
+	set -g __done_initial_window_id ''
 
-		if test $CMD_DURATION -gt $notify_duration  # longer than notify_duration
-		and test $__done_initial_window_id != (__done_get_window_id)  # terminal or window not in foreground
+	function __done_started --on-event fish_preexec
+		set __done_initial_window_id (__done_get_window_id)
+	end
 
-			set -l title "Done in $duration"
-			set -l message "$history[1]"
+	function __done_ended --on-event fish_prompt
+		set -l exit_status $status
 
-			if test $exit_status -ne 0
-				set title "Exited ($exit_status) after $duration"
+		if test $CMD_DURATION
+			# Store duration of last command
+			set duration (echo "$CMD_DURATION" | humanize_duration)
+			set notify_duration 10000
+
+			if test $CMD_DURATION -gt $notify_duration  # longer than notify_duration
+			and test $__done_initial_window_id != (__done_get_window_id)  # terminal or window not in foreground
+
+				set -l title "Done in $duration"
+				set -l message "$history[1]"
+
+				if test $exit_status -ne 0
+					set title "Exited ($exit_status) after $duration"
+				end
+
+				if type -q terminal-notifier  # https://github.com/julienXX/terminal-notifier
+					terminal-notifier -message "$message" -title "$title" -sender "$__done_initial_window_id"
+
+				else if type -q osascript  # AppleScript
+					osascript -e "display notification \"$message\" with title \"$title\""
+
+				else if type -q notify-send # Linux notify-send
+					notify-send --icon=terminal --app-name=terminal "$title" "$message"
+
+				else  # anything else
+					echo -e "\a" # bell sound
+				end
+
 			end
-
-			if type -q terminal-notifier  # https://github.com/julienXX/terminal-notifier
-				terminal-notifier -message "$message" -title "$title" -sender "$__done_initial_window_id"
-
-			else if type -q osascript  # AppleScript
-				osascript -e "display notification \"$message\" with title \"$title\""
-
-			else if type -q notify-send # Linux notify-send
-				notify-send --icon=terminal --app-name=terminal "$title" "$message"
-
-			else  # anything else
-				echo -e "\a" # bell sound
-			end
-
 		end
 	end
+
 end
