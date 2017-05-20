@@ -31,7 +31,6 @@ function __done_get_window_id
 	else if type -q xprop
 		xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2
 	end
-
 end
 
 function __done_started --on-event fish_preexec
@@ -46,10 +45,8 @@ function __done_ended --on-event fish_prompt
 		set duration (echo "$CMD_DURATION" | humanize_duration)
 		set notify_duration 10000
 
-		if begin
-				test $CMD_DURATION -gt $notify_duration  # longer than notify_duration
-				and test $__done_initial_window_id != (__done_get_window_id)  # terminal or window not in foreground
-			end
+		if test $CMD_DURATION -gt $notify_duration  # longer than notify_duration
+		and test $__done_initial_window_id != (__done_get_window_id)  # terminal or window not in foreground
 
 			set -l title "Done in $duration"
 			set -l message "$history[1]"
@@ -68,7 +65,7 @@ function __done_ended --on-event fish_prompt
 				notify-send --icon=terminal --app-name=terminal "$title" "$message"
 
 			else  # anything else
-      	echo -e "\a" # bell sound
+				echo -e "\a" # bell sound
 			end
 
 		end
