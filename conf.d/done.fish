@@ -22,6 +22,7 @@
 
 # done v1.2.2
 
+set -g __done_version 1.2.2
 
 function __done_get_window_id
 	if type -q lsappinfo
