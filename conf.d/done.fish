@@ -20,9 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# done v1.2.2
-
-set -g __done_version 1.2.2
+set -g __done_version 1.2.3
 
 function __done_get_window_id
 	if type -q lsappinfo
