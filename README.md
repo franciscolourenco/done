@@ -23,19 +23,19 @@ To test you could type, for instance `sleep 15`, and start using other app. Afte
 ## Install
 
 
-#### Using [fisherman](http://fisherman.sh/):
+#### Using [fisherman](http://fisherman.sh/)
 ```bash
 fisher install done
 ```
 
-#### Manually:
+#### Manually
 ```bash
 curl -Lo ~/.config/fish/functions/humanize_duration.fish --create-dirs https://raw.githubusercontent.com/fisherman/humanize_duration/master/humanize_duration.fish
 curl -Lo ~/.config/fish/conf.d/done.fish --create-dirs https://raw.githubusercontent.com/fisherman/done/master/conf.d/done.fish
 ```
 
 #### Terminal Notifier
-Notification with icons on macOS require `terminal-notifier` to be installed.
+Notification with icons on macOS requires `terminal-notifier` to be installed.
 
 ```bash
 brew install terminal-notifier
