@@ -24,23 +24,31 @@ To test you could type, for instance `sleep 15`, and start using other app. Afte
 
 
 #### Using [fisherman](http://fisherman.sh/):
-```
+```bash
 fisher install done
 ```
 
 #### Manually:
-```
+```bash
 curl -Lo ~/.config/fish/functions/humanize_duration.fish --create-dirs https://raw.githubusercontent.com/fisherman/humanize_duration/master/humanize_duration.fish
 curl -Lo ~/.config/fish/conf.d/done.fish --create-dirs https://raw.githubusercontent.com/fisherman/done/master/conf.d/done.fish
 ```
 
 ## Update
 
-```
+```bash
 fisher update
 ```
 
 [Subscribe](http://eepurl.com/cAcU3P) to be notified on updates.
+
+## Configure
+
+
+```bash
+# notify only if command takes more than 5000 ms (default)
+set -U __done_min_cmd_duration 5000
+```
 
 ## Support
 - fish 2.3.0+
