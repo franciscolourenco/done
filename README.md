@@ -30,7 +30,8 @@ fisher install done
 
 #### Manually:
 ```
-curl -Lo ~/.config/fish/conf.d/done.fish --create-dirs raw.githubusercontent.com/fisherman/done/master/conf.d/done.fish
+curl -Lo ~/.config/fish/functions/humanize_duration.fish --create-dirs https://raw.githubusercontent.com/fisherman/humanize_duration/master/humanize_duration.fish
+curl -Lo ~/.config/fish/conf.d/done.fish --create-dirs https://raw.githubusercontent.com/fisherman/done/master/conf.d/done.fish
 ```
 
 ## Update
