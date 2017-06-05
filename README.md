@@ -34,6 +34,14 @@ curl -Lo ~/.config/fish/functions/humanize_duration.fish --create-dirs https://r
 curl -Lo ~/.config/fish/conf.d/done.fish --create-dirs https://raw.githubusercontent.com/fisherman/done/master/conf.d/done.fish
 ```
 
+#### Terminal Notifier
+Notification with icons on macOS require `terminal-notifier` to be installed.
+
+```bash
+brew install terminal-notifier
+```
+
+
 ## Update
 
 ```bash
@@ -52,8 +60,8 @@ set -U __done_min_cmd_duration 5000
 
 ## Support
 - fish 2.3.0+
-- macOS 10.8+ via Notification Center. For notification with icons, please `brew install terminal-notifier`. Tab detection not supported for now.
-- Linux via `notify-send`. Otherwise bell sound is played. Window detection supported.
+- macOS 10.8+ via Notification Center.
+- Linux via `notify-send`. Otherwise bell sound is played.
 - Windows: Upvote https://github.com/fisherman/done/issues/5 if interested.
 
 ## Credits
