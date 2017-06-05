@@ -34,13 +34,12 @@ curl -Lo ~/.config/fish/functions/humanize_duration.fish --create-dirs https://r
 curl -Lo ~/.config/fish/conf.d/done.fish --create-dirs https://raw.githubusercontent.com/fisherman/done/master/conf.d/done.fish
 ```
 
-#### Terminal Notifier
-Notification with icons on macOS requires `terminal-notifier` to be installed.
+## Dependencies
+If you want notifications with icons on macOS, please install `terminal-notifier`
 
 ```bash
 brew install terminal-notifier
 ```
-
 
 ## Update
 
