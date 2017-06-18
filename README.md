@@ -53,8 +53,13 @@ fisher update
 
 
 ```bash
-# notify only if command takes more than 5000 ms (default)
-set -U __done_min_cmd_duration 5000
+# Notify only if command takes more than 5000 ms
+set -U __done_min_cmd_duration 5000  # default
+
+# Don't notify on git commands, except `git push` and `git pull`.
+# This is useful for commands like `git commit` which often trigger and wait for an editor outside the terminal.
+# Since the focus is on the editor and not the terminal, without this you would get notified on every commit.
+set -U __done_exclude 'git (?!push|pull)'  # default, accepts a regular expression
 ```
 
 ## Support
