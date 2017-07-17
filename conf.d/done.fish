@@ -26,6 +26,7 @@ function __done_get_window_id
 	if type -q lsappinfo
 		lsappinfo info -only bundleID (lsappinfo front) | cut -d '"' -f4
 	else if type -q xprop
+	and test $DISPLAY
 		xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2
 	end
 end
