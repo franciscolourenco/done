@@ -22,7 +22,7 @@ After installing you could type, for instance `sleep 6`, and start using other a
 ## Install
 
 
-#### Using [fisherman](http://fisherman.sh/)
+#### Using [fisherman](https://github.com/fisherman/fisherman)
 ```bash
 fisher install done
 ```
