@@ -56,7 +56,8 @@ and test -n __done_get_window_id  # is able to get window id
 			set duration (echo "$CMD_DURATION" | humanize_duration)
 
 			set -l title "Done in $duration"
-			set -l message "$history[1]"
+			set -l wd (pwd | sed "s,^$HOME,~,")
+			set -l message "$wd\$ $history[1]"
 
 			if test $exit_status -ne 0
 				set title "Exited ($exit_status) after $duration"
