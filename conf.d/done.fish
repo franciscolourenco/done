@@ -47,13 +47,13 @@ and test -n __done_get_window_id  # is able to get window id
 	function __done_ended --on-event fish_prompt
 		set -l exit_status $status
 
-		if test $CMD_DURATION
-		and test $CMD_DURATION -gt $__done_min_cmd_duration # longer than notify_duration
+		if test $cmd_duration
+		and test $cmd_duration -gt $__done_min_cmd_duration # longer than notify_duration
 		and test $__done_initial_window_id != (__done_get_window_id)  # terminal or window not in foreground
 		and not string match -qr $__done_exclude $history[1] # don't notify on git commands which might wait external editor
 
 			# Store duration of last command
-			set duration (echo "$CMD_DURATION" | humanize_duration)
+			set duration (echo "$cmd_duration" | humanize_duration)
 
 			set -l title "Done in $duration"
 			set -l message "$history[1]"
