@@ -70,7 +70,11 @@ and test -n __done_get_window_id  # is able to get window id
 				osascript -e "display notification \"$message\" with title \"$title\""
 
 			else if type -q notify-send # Linux notify-send
-				notify-send --icon=terminal "$title" "$message"
+				set -l crit
+				if test $exit_status -ne 0
+					set crit "--urgency=critical"
+				end
+				notify-send $crit --icon=terminal --app-name=fish "$title" "$message"
 
 			else  # anything else
 				echo -e "\a" # bell sound
