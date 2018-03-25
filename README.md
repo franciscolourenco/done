@@ -48,7 +48,7 @@ fisher update
 
 [Subscribe](http://eepurl.com/cAcU3P) to the newsletter to be notified of new versions.
 
-## Configure
+## Settings
 
 
 #### Only display notifications if a command takes more than a certain amount of time
@@ -56,7 +56,7 @@ fisher update
 `set -U __done_min_cmd_duration 5000  # default: 5000 ms`
 ```
 
-#### Prevent specific commands from triggering notifications.
+#### Prevent specific commands from triggering notifications. Accepts a regex.
 This is useful to exclude commands like `git commit` for instance, since it could trigger unwanted notifications if it is configured to use an external editor.
 
 ```bash
@@ -64,8 +64,10 @@ This is useful to exclude commands like `git commit` for instance, since it coul
 set -U __done_exclude 'git (?!push|pull)'  # default: all git commands, except push and pull. accepts a regex.
 ```
 
-
-
+#### Execute a custom command instead of showing the default notifications
+```bash
+set -U __done_notification_command 'some custom command'
+```
 
 
 ## Support

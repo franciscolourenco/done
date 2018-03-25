@@ -63,7 +63,9 @@ and test -n __done_get_window_id  # is able to get window id
 				set title "Exited ($exit_status) after $duration"
 			end
 
-			if type -q terminal-notifier  # https://github.com/julienXX/terminal-notifier
+			if set -q __done_notification_command
+				eval $__done_notification_command
+			else if type -q terminal-notifier  # https://github.com/julienXX/terminal-notifier
 				terminal-notifier -message "$message" -title "$title" -sender "$__done_initial_window_id"
 
 			else if type -q osascript  # AppleScript
