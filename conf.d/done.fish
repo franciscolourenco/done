@@ -31,6 +31,25 @@ function __done_get_window_id
 	end
 end
 
+function __done_tmux_active
+	if type -q tmux
+		set mypid %self
+		if tmux list-panes -a -F "#{window_active} #{pane_pid}" | grep "^0 $mypid" > /dev/null
+			return 0
+		end
+		return 1
+	end
+	return 1
+end
+
+function __is_focused
+	if test $__done_initial_window_id != (__done_get_window_id)
+		return 0
+	end
+	__done_tmux_active
+	return $status
+end
+
 
 # verify that the system has graphical capabilites before initializing
 if test -z "$SSH_CLIENT"  # not over ssh
@@ -49,7 +68,7 @@ and test -n __done_get_window_id  # is able to get window id
 
 		if test $CMD_DURATION
 		and test $CMD_DURATION -gt $__done_min_cmd_duration # longer than notify_duration
-		and test $__done_initial_window_id != (__done_get_window_id)  # terminal or window not in foreground
+		and __is_focused  # terminal or window not in foreground
 		and not string match -qr $__done_exclude $history[1] # don't notify on git commands which might wait external editor
 
 			# Store duration of last command
