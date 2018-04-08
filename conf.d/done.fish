@@ -67,13 +67,16 @@ and test -n __done_get_window_id  # is able to get window id
 	function __done_ended --on-event fish_prompt
 		set -l exit_status $status
 
-		if test $CMD_DURATION
-		and test $CMD_DURATION -gt $__done_min_cmd_duration # longer than notify_duration
+		# backwards compatibilty for fish < v3.0
+		set -q cmd_duration; or set -l cmd_duration $CMD_DURATION
+
+		if test $cmd_duration
+		and test $cmd_duration -gt $__done_min_cmd_duration # longer than notify_duration
 		and not __done_is_process_window_focused  # process pane or window not focused
 		and not string match -qr $__done_exclude $history[1] # don't notify on git commands which might wait external editor
 
 			# Store duration of last command
-			set -l humanized_duration (echo "$CMD_DURATION" | humanize_duration)
+			set -l humanized_duration (echo "$cmd_duration" | humanize_duration)
 
 			set -l title "Done in $humanized_duration"
 			set -l wd (pwd | sed "s,^$HOME,~,")
