@@ -22,7 +22,7 @@
 
 set -g __done_version 1.6.0
 
-function __done_get_window_id
+function __done_get_focused_window_id
 	if type -q lsappinfo
 		lsappinfo info -only bundleID (lsappinfo front) | cut -d '"' -f4
 	else if type -q xprop
@@ -31,23 +31,24 @@ function __done_get_window_id
 	end
 end
 
-function __done_tmux_active
-	if type -q tmux
-		set mypid %self
-		if tmux list-panes -a -F "#{window_active} #{pane_pid}" | grep "^0 $mypid" > /dev/null
-			return 0
-		end
-		return 1
-	end
-	return 1
+function __done_is_tmux_window_active
+	set -q fish_pid; or set -l fish_pid %self
+
+	tmux list-panes -a -F "#{session_attached} #{window_active} #{pane_pid}" | string match -q "1 1 $fish_pid"
 end
 
-function __is_focused
-	if test $__done_initial_window_id != (__done_get_window_id)
-		return 0
+function __done_is_process_window_focused
+	# Return false if the window is not focused
+	if test $__done_initial_window_id != (__done_get_focused_window_id)
+		return 1
 	end
-	__done_tmux_active
-	return $status
+	# If inside a tmux session, check if the tmux window is focused
+	if type -q tmux
+		__done_is_tmux_window_active
+		return $status
+	end
+
+	return 0
 end
 
 
@@ -68,24 +69,31 @@ and test -n __done_get_window_id  # is able to get window id
 
 		if test $CMD_DURATION
 		and test $CMD_DURATION -gt $__done_min_cmd_duration # longer than notify_duration
-		and __is_focused  # terminal or window not in foreground
+		and not __done_is_process_window_focused  # process pane or window not focused
 		and not string match -qr $__done_exclude $history[1] # don't notify on git commands which might wait external editor
 
 			# Store duration of last command
-			set duration (echo "$CMD_DURATION" | humanize_duration)
+			set -l humanized_duration (echo "$CMD_DURATION" | humanize_duration)
 
-			set -l title "Done in $duration"
+			set -l title "Done in $humanized_duration"
 			set -l wd (pwd | sed "s,^$HOME,~,")
 			set -l message "$wd/ $history[1]"
+			set -l sender $__done_initial_window_id
+
+			# workarout terminal notifier bug when sending notifications from inside tmux
+			# https://github.com/julienXX/terminal-notifier/issues/216
+			if test $TMUX
+				set sender "tmux"
+			end
 
 			if test $exit_status -ne 0
-				set title "Failed ($exit_status) after $duration"
+				set title "Failed ($exit_status) after $humanized_duration"
 			end
 
 			if set -q __done_notification_command
 				eval $__done_notification_command
 			else if type -q terminal-notifier  # https://github.com/julienXX/terminal-notifier
-				terminal-notifier -message "$message" -title "$title" -sender "$__done_initial_window_id"
+				terminal-notifier -message "$message" -title "$title" -sender "$sender" -activate "$__done_initial_window_id"
 
 			else if type -q osascript  # AppleScript
 				osascript -e "display notification \"$message\" with title \"$title\""
