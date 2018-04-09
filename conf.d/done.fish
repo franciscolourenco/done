@@ -34,7 +34,7 @@ end
 function __done_is_tmux_window_active
 	set -q fish_pid; or set -l fish_pid %self
 
-	not tmux list-panes -a -F "#{session_attached} #{window_active} #{pane_pid}" 2> /dev/null | string match -q "1 0 $fish_pid"
+	not tmux list-panes -a -F "#{session_attached} #{window_active} #{pane_pid}" | string match -q "1 0 $fish_pid"
 end
 
 function __done_is_process_window_focused
@@ -44,6 +44,7 @@ function __done_is_process_window_focused
 	end
 	# If inside a tmux session, check if the tmux window is focused
 	if type -q tmux
+	and test -n "$TMUX"
 		__done_is_tmux_window_active
 		return $status
 	end
