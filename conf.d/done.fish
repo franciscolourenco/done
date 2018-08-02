@@ -105,6 +105,7 @@ and test -n __done_get_focused_window_id  # is able to get window id
 			else if type -q notify-send # Linux notify-send
 				set -l urgency
 				if test $exit_status -ne 0
+				or test $__done_notify_in_fullscreen -eq 1
 					set urgency "--urgency=critical"
 				end
 				notify-send $urgency --icon=terminal --app-name=fish "$title" "$message"

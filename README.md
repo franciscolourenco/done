@@ -69,6 +69,11 @@ set -U __done_exclude 'git (?!push|pull)'  # default: all git commands, except p
 set -U __done_notification_command 'some custom command'
 ```
 
+#### Display notification even in full screen mode
+```bash
+set -U __done_notify_in_fullscreen 1
+```
+
 
 ## Support
 - fish 2.3.0+
