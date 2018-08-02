@@ -84,6 +84,11 @@ set -U __done_notify_sound 1
 set -U __done_sway_ignore_visible 1
 ```
 
+#### Display notification even in full screen mode
+```bash
+set -U __done_notify_in_fullscreen 1
+```
+
 ## Support
 
 - [fish](https://fishshell.com) 2.3.0+

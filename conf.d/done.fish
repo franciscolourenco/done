@@ -142,6 +142,7 @@ if test -z "$SSH_CLIENT" # not over ssh
             else if type -q notify-send # Linux notify-send
                 set -l urgency
                 if test $exit_status -ne 0
+                or test $__done_notify_in_fullscreen -eq 1
                     set urgency "--urgency=critical"
                 end
                 notify-send $urgency --icon=terminal --app-name=fish "$title" "$message"
