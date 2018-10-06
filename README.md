@@ -7,7 +7,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/stability-stable-green.svg" alt="Stability: Stable">
-  <img src="https://img.shields.io/github/release/fisherman/done.svg" alt="Release version">
+  <img src="https://img.shields.io/github/release/franciscolourenco/done.svg" alt="Release version">
   <img src="https://img.shields.io/badge/fish-%3E=2.3.0-orange.svg" alt="fish >=2.3.0">
   <img src="https://img.shields.io/badge/license-MIT-lightgray.svg" alt="License: MIT">
 </p>
@@ -22,15 +22,15 @@ After installing you could type, for instance `sleep 6`, and start using other a
 ## Install
 
 
-#### Using [fisherman](https://github.com/fisherman/fisherman)
+#### Using [fisherman](https://github.com/jorgebucaran/fisher)
 ```bash
-fisher install done
+fisher franciscolourenco/done
 ```
 
 #### Manually
 ```bash
 curl -Lo ~/.config/fish/functions/humanize_duration.fish --create-dirs https://raw.githubusercontent.com/fisherman/humanize_duration/master/humanize_duration.fish
-curl -Lo ~/.config/fish/conf.d/done.fish --create-dirs https://raw.githubusercontent.com/fisherman/done/master/conf.d/done.fish
+curl -Lo ~/.config/fish/conf.d/done.fish --create-dirs https://raw.githubusercontent.com/franciscolourenco/done/master/conf.d/done.fish
 ```
 
 ## Dependencies
@@ -74,7 +74,7 @@ set -U __done_notification_command 'some custom command'
 - fish 2.3.0+
 - macOS 10.8+ via Notification Center.
 - Linux via `notify-send`. Otherwise bell sound is played.
-- Windows: Upvote https://github.com/fisherman/done/issues/5 if interested.
+- Windows: Upvote https://github.com/franciscolourenco/done/issues/5 if interested.
 
 ## Credits
 - [Francisco Lourenço](https://github.com/aristidesfl/) - Maintainer
