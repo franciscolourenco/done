@@ -24,7 +24,7 @@ After installing you could type, for instance `sleep 6`, and start using other a
 
 #### Using [fisherman](https://github.com/jorgebucaran/fisher)
 ```bash
-fisher franciscolourenco/done
+fisher add franciscolourenco/done
 ```
 
 #### Manually
