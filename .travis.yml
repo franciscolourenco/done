@@ -6,4 +6,4 @@ before_install:
 script:
     - fish --version
     - curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisherman
-    - fish -c "fisher i fishtape .; fishtape test/*.fish"
+    - fish -c "fisher add jorgebucaran/fishtape .; fishtape test/*.fish"
