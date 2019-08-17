@@ -55,7 +55,7 @@ end
 
 # verify that the system has graphical capabilites before initializing
 if test -z "$SSH_CLIENT"  # not over ssh
-and test -n __done_get_focused_window_id  # is able to get window id
+and count (__done_get_focused_window_id) > /dev/null  # is able to get window id
 
 	set -g __done_initial_window_id ''
 	set -q __done_min_cmd_duration; or set -g __done_min_cmd_duration 5000
