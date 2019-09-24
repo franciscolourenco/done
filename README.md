@@ -40,6 +40,8 @@ If you want notifications with icons on macOS, please install `terminal-notifier
 brew install terminal-notifier
 ```
 
+If you are using `sway` then please install `jq`.
+
 ## Updating
 
 ```fish
