@@ -84,12 +84,6 @@ and count (__done_get_focused_window_id) > /dev/null  # is able to get window id
 			set -l message "$wd/ $history[1]"
 			set -l sender $__done_initial_window_id
 
-			# workarout terminal notifier bug when sending notifications from inside tmux
-			# https://github.com/julienXX/terminal-notifier/issues/216
-			if test $TMUX
-				set sender "tmux"
-			end
-
 			if test $exit_status -ne 0
 				set title "Failed ($exit_status) after $humanized_duration"
 			end
@@ -97,7 +91,7 @@ and count (__done_get_focused_window_id) > /dev/null  # is able to get window id
 			if set -q __done_notification_command
 				eval $__done_notification_command
 			else if type -q terminal-notifier  # https://github.com/julienXX/terminal-notifier
-				terminal-notifier -message "$message" -title "$title" -sender "$sender" -activate "$__done_initial_window_id"
+				terminal-notifier -message "$message" -title "$title" -sender "$__done_initial_window_id"
 
 			else if type -q osascript  # AppleScript
 				osascript -e "display notification \"$message\" with title \"$title\""
