@@ -70,6 +70,12 @@ set -U __done_exclude 'git (?!push|pull)'  # default: all git commands, except p
 set -U __done_notification_command 'some custom command'
 ```
 
+#### Play sound when showing notifications.
+
+```fish
+set -U __done_notify_sound 1
+```
+
 ## Support
 
 - [fish](https://fishshell.com) 2.3.0+
