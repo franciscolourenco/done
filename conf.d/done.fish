@@ -63,6 +63,7 @@ and count (__done_get_focused_window_id) > /dev/null  # is able to get window id
 	set -g __done_initial_window_id ''
 	set -q __done_min_cmd_duration; or set -g __done_min_cmd_duration 5000
 	set -q __done_exclude; or set -g __done_exclude 'git (?!push|pull)'
+	set -q __done_notify_sound; or set -g __done_notify_sound 0
 
 	function __done_started --on-event fish_preexec
 		set __done_initial_window_id (__done_get_focused_window_id)
@@ -93,11 +94,21 @@ and count (__done_get_focused_window_id) > /dev/null  # is able to get window id
 
 			if set -q __done_notification_command
 				eval $__done_notification_command
+				if test "$__done_notify_sound" -eq 1
+					echo -e "\a" # bell sound
+				end
 			else if type -q terminal-notifier  # https://github.com/julienXX/terminal-notifier
-				terminal-notifier -message "$message" -title "$title" -sender "$__done_initial_window_id"
+				if test "$__done_notify_sound" -eq 1
+					terminal-notifier -message "$message" -title "$title" -sender "$__done_initial_window_id" -sound default
+				else
+					terminal-notifier -message "$message" -title "$title" -sender "$__done_initial_window_id"
+				end
 
 			else if type -q osascript  # AppleScript
 				osascript -e "display notification \"$message\" with title \"$title\""
+				if test "$__done_notify_sound" -eq 1
+					echo -e "\a" # bell sound
+				end
 
 			else if type -q notify-send # Linux notify-send
 				set -l urgency
@@ -105,6 +116,9 @@ and count (__done_get_focused_window_id) > /dev/null  # is able to get window id
 					set urgency "--urgency=critical"
 				end
 				notify-send $urgency --icon=terminal --app-name=fish "$title" "$message"
+				if test "$__done_notify_sound" -eq 1
+					echo -e "\a" # bell sound
+				end
 
 			else if type -q notify-desktop # Linux notify-desktop
 				set -l urgency
@@ -112,6 +126,9 @@ and count (__done_get_focused_window_id) > /dev/null  # is able to get window id
 					set urgency "--urgency=critical"
 				end
 				notify-desktop $urgency --icon=terminal --app-name=fish "$title" "$message"
+				if test "$__done_notify_sound" -eq 1
+					echo -e "\a" # bell sound
+				end
 
 			else  # anything else
 				echo -e "\a" # bell sound
