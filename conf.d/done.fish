@@ -25,11 +25,11 @@ set -g __done_version 1.10.0
 function __done_get_focused_window_id
 	if type -q lsappinfo
 		lsappinfo info -only bundleID (lsappinfo front) | cut -d '"' -f4
-	else if test $SWAYSOCK
+	else if test -n "$SWAYSOCK"
 	and type -q jq
 		swaymsg --type get_tree | jq '.. | objects | select(.focused == true) | .id'
 	else if type -q xprop
-	and test $DISPLAY
+	and test -n "$DISPLAY"
 		xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2
 	end
 end
