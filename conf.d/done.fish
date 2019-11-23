@@ -56,7 +56,7 @@ function __done_is_process_window_focused
 end
 
 
-# verify that the system has graphical capabilites before initializing
+# verify that the system has graphical capabilities before initializing
 if test -z "$SSH_CLIENT"  # not over ssh
 and count (__done_get_focused_window_id) > /dev/null  # is able to get window id
 
@@ -72,7 +72,7 @@ and count (__done_get_focused_window_id) > /dev/null  # is able to get window id
 	function __done_ended --on-event fish_prompt
 		set -l exit_status $status
 
-		# backwards compatibilty for fish < v3.0
+		# backwards compatibility for fish < v3.0
 		set -q cmd_duration; or set -l cmd_duration $CMD_DURATION
 
 		if test $cmd_duration
