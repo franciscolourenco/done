@@ -31,6 +31,8 @@ function __done_get_focused_window_id
 	else if type -q xprop
 	and test -n "$DISPLAY"
 		xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2
+	else if uname -a | string match --quiet --regex Microsoft
+		echo 12345  # dummy value since cannot get window state info under WSL
 	end
 end
 
@@ -130,6 +132,14 @@ and count (__done_get_focused_window_id) > /dev/null  # is able to get window id
 					echo -e "\a" # bell sound
 				end
 
+			else if uname -a | string match --quiet --regex Microsoft
+				if powershell.exe -command "Import-Module -Name BurntToast" 2> /dev/null
+					if test "$__done_notify_sound" -eq 1
+						set soundopt "-Sound Default"
+					end
+					powershell.exe -command New-BurntToastNotification -Text \""$title"\",\""$message"\" $soundopt
+				end
+
 			else  # anything else
 				echo -e "\a" # bell sound
 			end
@@ -149,4 +159,3 @@ function __done_uninstall -e done_uninstall
   # Erase __done variables
   set -e __done_version
 end
-
