@@ -42,6 +42,8 @@ brew install terminal-notifier
 
 - If you are using https://swaywm.org please install `jq`.
 
+- If you are using Windows Subsystem for Linux (WSL), please install the [BurntToast](https://github.com/Windos/BurntToast) Powershell module. 
+
 ## Updating
 
 ```fish
@@ -81,7 +83,7 @@ set -U __done_notify_sound 1
 - [fish](https://fishshell.com) 2.3.0+
 - macOS 10.8+ via Notification Center.
 - Linux via `notify-send`. Otherwise bell sound is played.
-- Windows: Upvote https://github.com/franciscolourenco/done/issues/5 if interested.
+- Windows 10 via Windows Subsystem for Linux (WSL) and [BurntToast](https://github.com/Windos/BurntToast)
 
 ## Credits
 
