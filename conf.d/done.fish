@@ -42,7 +42,7 @@ end
 
 function __done_is_process_window_focused
 	# Return false if the window is not focused
-	if test "$__done_initial_window_id" != (__done_get_focused_window_id)
+	if test "$__done_initial_window_id" != "(__done_get_focused_window_id)"
 		return 1
 	end
 	# If inside a tmux session, check if the tmux window is focused
