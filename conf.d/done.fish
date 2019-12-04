@@ -39,7 +39,17 @@ end
 function __done_is_tmux_window_active
 	set -q fish_pid; or set -l fish_pid %self
 
-	not tmux list-panes -a -F "#{session_attached} #{window_active} #{pane_pid}" | string match -q "1 0 $fish_pid"
+	# If tmux is set to not run as a login shell,
+	# e.g. `set -g default-command "${SHELL}"` in tmux config,
+	# then the pane_pid will be parent pid of the current fish shell.
+	if status is-login
+		set tmux_fish_pid $fish_pid
+	else
+		set tmux_fish_pid (ps -o ppid= -p $fish_pid)
+	end
+	# tmux session attached and window is active -> no notification
+	# all other combinations -> send notification
+	tmux list-panes -a -F "#{session_attached} #{window_active} #{pane_pid}" | string match -q "1 1 $tmux_fish_pid"
 end
 
 function __done_is_process_window_focused
