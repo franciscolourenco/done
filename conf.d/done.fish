@@ -52,6 +52,10 @@ function __done_is_tmux_window_active
     tmux list-panes -a -F "#{session_attached} #{window_active} #{pane_pid}" | string match -q "1 1 $tmux_fish_pid"
 end
 
+function __done_is_screen_window_active
+    string match --quiet --regex "$STY\s+\(Attached" (screen -ls)
+end
+
 function __done_is_process_window_focused
     # Return false if the window is not focused
     if test "$__done_initial_window_id" != "(__done_get_focused_window_id)"
@@ -61,6 +65,13 @@ function __done_is_process_window_focused
     if type -q tmux
         and test -n "$TMUX"
         __done_is_tmux_window_active
+        return $status
+    end
+
+    # If inside a screen session, check if the screen window is focused
+    if type -q screen
+        and test -n "$STY"
+        __done_is_screen_window_active
         return $status
     end
 
@@ -164,6 +175,7 @@ function __done_uninstall -e done_uninstall
     functions -e __done_started
     functions -e __done_get_focused_window_id
     functions -e __done_is_tmux_window_active
+    functions -e __done_is_screen_window_active
     functions -e __done_is_process_window_focused
 
     # Erase __done variables
