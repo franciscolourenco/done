@@ -155,7 +155,7 @@ if test -z "$SSH_CLIENT" # not over ssh
                 end
 
             else if uname -a | string match --quiet --regex Microsoft
-                if powershell.exe -command "Import-Module -Name BurntToast" 2>/dev/null
+                if command -v powershell.exe; and powershell.exe -command "Import-Module -Name BurntToast" 2>/dev/null
                     if test "$__done_notify_sound" -eq 1
                         set soundopt "-Sound Default"
                     end
