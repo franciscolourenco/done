@@ -108,7 +108,7 @@ if test -z "$SSH_CLIENT" # not over ssh
             set -l humanized_duration (echo "$cmd_duration" | humanize_duration)
 
             set -l title "Done in $humanized_duration"
-            set -l wd (pwd | sed "s,^$HOME,~,")
+            set -l wd (string replace --regex "^$HOME" "~" (pwd))
             set -l message "$wd/ $history[1]"
             set -l sender $__done_initial_window_id
 
