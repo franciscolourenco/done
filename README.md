@@ -78,6 +78,12 @@ set -U __done_notification_command 'some custom command'
 set -U __done_notify_sound 1
 ```
 
+#### When using `sway`, do not show notifications for visible windows.
+
+```fish
+set -U __done_sway_ignore_visible 1
+```
+
 ## Support
 
 - [fish](https://fishshell.com) 2.3.0+
