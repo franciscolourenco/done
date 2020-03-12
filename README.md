@@ -43,6 +43,7 @@ brew install terminal-notifier
 - If you are using https://swaywm.org please install `jq`.
 
 - If you are using Windows Subsystem for Linux (WSL), please install the [BurntToast](https://github.com/Windos/BurntToast) Powershell module. 
+  Note: in some cases you may also need to install [wslu](https://github.com/wslutilities/wslu).
 
 ## Updating
 

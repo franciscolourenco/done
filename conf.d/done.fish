@@ -159,17 +159,22 @@ if test -z "$SSH_CLIENT" # not over ssh
                     echo -e "\a" # bell sound
                 end
 
-            else if uname -a | string match --quiet --regex Microsoft; \
-                and set -l powershell_exe (command -v "powershell.exe"); \
-                or set -l powershell_exe \
-                    (wslpath (wslvar windir)/System32/WindowsPowerShell/v1.0/powershell.exe); \
-                and test -x "$powershell_exe"; \
-                and "$powershell_exe" -command "Import-Module -Name BurntToast" 2>/dev/null
-
-                if test "$__done_notify_sound" -eq 1
-                    set soundopt "-Sound Default"
+            else if uname -a | string match --quiet --regex Microsoft
+                set -l powershell_exe (command --search "powershell.exe")
+                if test $status -ne 0
+                    and command --search wslvar
+                    set -l powershell_exe (wslpath (wslvar windir)/System32/WindowsPowerShell/v1.0/powershell.exe)
                 end
-                command "$powershell_exe" -command New-BurntToastNotification -Text \""$title"\",\""$message"\" $soundopt
+
+                if string length --quiet "$powershell_exe"
+                    and test -x "$powershell_exe"
+                    and "$powershell_exe" -command "Import-Module -Name BurntToast" 2>/dev/null
+
+                    if test "$__done_notify_sound" -eq 1
+                        set soundopt "-Sound Default"
+                    end
+                    command "$powershell_exe" -command New-BurntToastNotification -Text \""$title"\",\""$message"\" $soundopt
+                end
 
             else # anything else
                 echo -e "\a" # bell sound
