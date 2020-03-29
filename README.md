@@ -84,6 +84,11 @@ set -U __done_notify_sound 1
 set -U __done_sway_ignore_visible 1
 ```
 
+#### For Linux, set the urgency level for notifications sent via notify-send (low, normal, critical).
+```fish
+set -U __done_notification_urgency_level critical
+```
+
 ## Support
 
 - [fish](https://fishshell.com) 2.3.0+
