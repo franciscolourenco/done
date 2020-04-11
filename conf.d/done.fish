@@ -30,11 +30,8 @@ function __done_get_focused_window_id
         swaymsg --type get_tree | jq '.. | objects | select(.focused == true) | .id'
     else if type -q xprop
         and test -n "$DISPLAY"
-        and begin
-            xprop -help
-            # some versions of xprop raise error code to -help
-            or xprop -grammar
-        end >/dev/null 2>&1
+        # Test that the X server at $DISPLAY is running
+        and xprop -grammar >/dev/null 2>&1
         xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2
     else if uname -a | string match --quiet --regex Microsoft
         echo 12345 # dummy value since cannot get window state info under WSL
