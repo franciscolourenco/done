@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-set -g __done_version 1.14.5
+set -g __done_version 1.14.6
 
 function __done_run_powershell_script
     set -l powershell_exe (command --search "powershell.exe")
