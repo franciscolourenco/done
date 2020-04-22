@@ -208,7 +208,7 @@ if set -q __done_enabled
                 if test "$__done_notify_sound" -eq 1
                     set soundopt "-Sound Default"
                 else
-                    set soundopt "-Silent"
+                    set soundopt -Silent
                 end
 
                 __done_run_powershell_script "
