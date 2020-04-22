@@ -67,10 +67,10 @@ This is useful to exclude commands like `git commit` for instance, since it coul
 set -U __done_exclude 'git (?!push|pull)'  # default: all git commands, except push and pull. accepts a regex.
 ```
 
-#### Execute a custom command instead of showing the default notifications
+#### Execute a custom command instead of showing the default notifications. The `done` notification title and message can also be passed.
 
 ```fish
-set -U __done_notification_command 'some custom command'
+set -U __done_notification_command "your-command \$title \$message"
 ```
 
 #### Play sound when showing notifications.
@@ -88,6 +88,12 @@ set -U __done_sway_ignore_visible 1
 #### For Linux, set the urgency level for notifications sent via notify-send (low, normal, critical).
 ```fish
 set -U __done_notification_urgency_level critical
+```
+
+#### Allow notifications to be sent on systems without graphical capabilities. Note this requires you to also set `__done_notification_command`.
+
+```fish
+set -U __done_allow_nongraphical 1
 ```
 
 ## Support
