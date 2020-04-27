@@ -46,8 +46,9 @@ function __done_get_focused_window_id
     else if test -n "$SWAYSOCK"
         and type -q jq
         swaymsg --type get_tree | jq '.. | objects | select(.focused == true) | .id'
-    else if begin test "$XDG_SESSION_DESKTOP" = gnome; and type -q gdbus; end
-	gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/Shell --method org.gnome.Shell.Eval 'global.display.focus_window.get_id()'
+    else if begin test "$XDG_SESSION_DESKTOP" = gnome; and type -q gdbus
+        end
+        gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/Shell --method org.gnome.Shell.Eval 'global.display.focus_window.get_id()'
     else if type -q xprop
         and test -n "$DISPLAY"
         # Test that the X server at $DISPLAY is running
@@ -172,12 +173,13 @@ if test -z "$SSH_CLIENT" # not over ssh
                 end
 
             else if type -q notify-send # Linux notify-send
-                set -l urgency $__done_notification_urgency_level
+                set urgency $__done_notification_urgency_level
                 # override user-defined urgency level if non-zero exitstatus
-                if test $exit_status -ne 0
-                    set urgency "--urgency=critical"
+                if test -z $urgency
+                    set urgency "critical"
                 end
-                notify-send $urgency --icon=utilities-terminal --app-name=fish "$title" "$message"
+                notify-send --urgency=$urgency --icon=utilities-terminal --app-name=fish "$title" "$message"
+
                 if test "$__done_notify_sound" -eq 1
                     echo -e "\a" # bell sound
                 end
