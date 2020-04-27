@@ -173,9 +173,9 @@ if test -z "$SSH_CLIENT" # not over ssh
                 set -l urgency $__done_notification_urgency_level
                 # override user-defined urgency level if non-zero exitstatus
                 if test $exit_status -ne 0
-                    set urgency "--urgency=critical"
+                    set urgency "critical"
                 end
-                notify-send -u $urgency --icon=terminal --app-name=fish "$title" "$message"
+                notify-send --urgency=$urgency --icon=terminal --app-name=fish "$title" "$message"
                 if test "$__done_notify_sound" -eq 1
                     echo -e "\a" # bell sound
                 end
