@@ -46,6 +46,8 @@ function __done_get_focused_window_id
     else if test -n "$SWAYSOCK"
         and type -q jq
         swaymsg --type get_tree | jq '.. | objects | select(.focused == true) | .id'
+    else if begin test "$XDG_SESSION_DESKTOP" = gnome; and type -q gdbus; end
+	gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/Shell --method org.gnome.Shell.Eval 'global.display.focus_window.get_id()'
     else if type -q xprop
         and test -n "$DISPLAY"
         # Test that the X server at $DISPLAY is running
