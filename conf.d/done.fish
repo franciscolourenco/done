@@ -175,7 +175,7 @@ if test -z "$SSH_CLIENT" # not over ssh
                 if test $exit_status -ne 0
                     set urgency "--urgency=critical"
                 end
-                notify-send $urgency --icon=terminal --app-name=fish "$title" "$message"
+                notify-send $urgency --icon=utilities-terminal --app-name=fish "$title" "$message"
                 if test "$__done_notify_sound" -eq 1
                     echo -e "\a" # bell sound
                 end
@@ -185,7 +185,7 @@ if test -z "$SSH_CLIENT" # not over ssh
                 if test $exit_status -ne 0
                     set urgency "--urgency=critical"
                 end
-                notify-desktop $urgency --icon=terminal --app-name=fish "$title" "$message"
+                notify-desktop $urgency --icon=utilities-terminal --app-name=fish "$title" "$message"
                 if test "$__done_notify_sound" -eq 1
                     echo -e "\a" # bell sound
                 end
