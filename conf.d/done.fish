@@ -173,11 +173,18 @@ if test -z "$SSH_CLIENT" # not over ssh
                 end
 
             else if type -q notify-send # Linux notify-send
-                set urgency $__done_notification_urgency_level
+                # set urgency to normal
+                set -l urgency "normal"
+
+                # use user-defined urgency if set
+                if test -q __done_notification_urgency_level
+                    set urgency "$__done_notification_urgency_level"
+                end
                 # override user-defined urgency level if non-zero exitstatus
-                if test -z $urgency
+                if test $exit_status -ne 0
                     set urgency "critical"
                 end
+
                 notify-send --urgency=$urgency --icon=utilities-terminal --app-name=fish "$title" "$message"
 
                 if test "$__done_notify_sound" -eq 1
