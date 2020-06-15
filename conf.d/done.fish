@@ -177,7 +177,7 @@ if test -z "$SSH_CLIENT" # not over ssh
                 set -l urgency "normal"
 
                 # use user-defined urgency if set
-                if test -q __done_notification_urgency_level
+                if set -q __done_notification_urgency_level
                     set urgency "$__done_notification_urgency_level"
                 end
                 # override user-defined urgency level if non-zero exitstatus
