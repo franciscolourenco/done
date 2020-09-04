@@ -54,7 +54,7 @@ function __done_get_focused_window_id
         # Test that the X server at $DISPLAY is running
         and xprop -grammar >/dev/null 2>&1
         xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2
-    else if uname -a | string match --quiet --regex Microsoft
+    else if uname -a | string match --quiet --ignore-case --regex microsoft
         __done_run_powershell_script '
 Add-Type @"
     using System;
@@ -201,7 +201,7 @@ if test -z "$SSH_CLIENT" # not over ssh
                     echo -e "\a" # bell sound
                 end
 
-            else if uname -a | string match --quiet --regex Microsoft
+            else if uname -a | string match --quiet --ignore-case --regex microsoft
                 if test "$__done_notify_sound" -eq 1
                     set soundopt "-Sound Default"
                 else
