@@ -28,7 +28,6 @@ fisher add franciscolourenco/done
 #### Manually
 
 ```fish
-curl -Lo ~/.config/fish/functions/humanize_duration.fish --create-dirs https://raw.githubusercontent.com/fishpkg/fish-humanize-duration/master/humanize_duration.fish
 curl -Lo ~/.config/fish/conf.d/done.fish --create-dirs https://raw.githubusercontent.com/franciscolourenco/done/master/conf.d/done.fish
 ```
 
@@ -41,6 +40,7 @@ brew install terminal-notifier
 ```
 
 - If you are using https://swaywm.org please install `jq`.
+
 
 - If you are using Windows Subsystem for Linux (WSL) you may need to install [wslu](https://github.com/wslutilities/wslu), but usually it is pre-installed.
 
@@ -85,6 +85,7 @@ set -U __done_sway_ignore_visible 1
 ```
 
 #### For Linux, set the urgency level for notifications sent via notify-send (low, normal, critical).
+
 ```fish
 set -U __done_notification_urgency_level critical
 ```
