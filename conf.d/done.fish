@@ -268,6 +268,7 @@ function __done_uninstall -e done_uninstall
     functions -e __done_is_process_window_focused
     functions -e __done_windows_notification
     functions -e __done_run_powershell_script
+    functions -e __done_humanize_duration
 
     # Erase __done variables
     set -e __done_version
