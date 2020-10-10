@@ -116,6 +116,21 @@ function __done_is_process_window_focused
     return 0
 end
 
+function __done_humanize_duration -a milliseconds
+    set -l seconds (math --scale=0 "$milliseconds/1000" % 60)
+    set -l minutes (math --scale=0 "$milliseconds/60000" % 60)
+    set -l hours (math --scale=0 "$milliseconds/3600000")
+
+    if test $hours -gt 0
+        printf '%s' $hours'h '
+    end
+    if test $minutes -gt 0
+        printf '%s' $minutes'm '
+    end
+    if test $seconds -gt 0
+        printf '%s' $seconds's'
+    end
+end
 
 # verify that the system has graphical capabilities before initializing
 if test -z "$SSH_CLIENT" # not over ssh
@@ -143,7 +158,7 @@ if test -z "$SSH_CLIENT" # not over ssh
             and not string match -qr $__done_exclude $history[1] # don't notify on git commands which might wait external editor
 
             # Store duration of last command
-            set -l humanized_duration (echo "$cmd_duration" | humanize_duration)
+            set -l humanized_duration (__done_humanize_duration "$cmd_duration")
 
             set -l title "Done in $humanized_duration"
             set -l wd (string replace --regex "^$HOME" "~" (pwd))
