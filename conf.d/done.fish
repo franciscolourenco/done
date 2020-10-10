@@ -119,7 +119,7 @@ end
 function __done_humanize_duration -a milliseconds
     set -l seconds (math --scale=0 "$milliseconds/1000" % 60)
     set -l minutes (math --scale=0 "$milliseconds/60000" % 60)
-    set -l hours (math --scale=0 "$milliseconds/3600000" % 60)
+    set -l hours (math --scale=0 "$milliseconds/3600000")
 
     if test $hours -gt 0
         printf '%s' $hours'h '
