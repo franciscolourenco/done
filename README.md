@@ -47,7 +47,7 @@ brew install terminal-notifier
 ## Updating
 
 ```fish
-fisher
+fisher update franciscolourenco/done
 ```
 
 ## Settings
