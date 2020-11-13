@@ -22,7 +22,7 @@ After installing you could type, for instance `sleep 6`, and start using other a
 #### Using [Fisher](https://github.com/jorgebucaran/fisher)
 
 ```fish
-fisher add franciscolourenco/done
+fisher install franciscolourenco/done
 ```
 
 #### Manually
@@ -47,7 +47,7 @@ brew install terminal-notifier
 ## Updating
 
 ```fish
-fisher
+fisher update franciscolourenco/done
 ```
 
 ## Settings
