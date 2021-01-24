@@ -98,6 +98,8 @@ Add-Type @"
 "@
 [WindowsCompat]::GetForegroundWindow()
 '
+    else if set -q __done_allow_nongraphical
+        echo 12345 # dummy value
     end
 end
 
@@ -123,6 +125,11 @@ end
 
 function __done_is_process_window_focused
     # Return false if the window is not focused
+
+    if set -q __done_allow_nongraphical
+        return 1
+    end
+
     set __done_focused_window_id (__done_get_focused_window_id)
     if test "$__done_sway_ignore_visible" -eq 1
         and test -n "$SWAYSOCK"
@@ -167,7 +174,15 @@ end
 # verify that the system has graphical capabilities before initializing
 if test -z "$SSH_CLIENT" # not over ssh
     and count (__done_get_focused_window_id) >/dev/null # is able to get window id
+    set __done_enabled
+end
 
+if set -q __done_allow_nongraphical
+    and set -q __done_notification_command
+    set __done_enabled
+end
+
+if set -q __done_enabled
     set -g __done_initial_window_id ''
     set -q __done_min_cmd_duration; or set -g __done_min_cmd_duration 5000
     set -q __done_exclude; or set -g __done_exclude 'git (?!push|pull)'
@@ -250,6 +265,7 @@ if test -z "$SSH_CLIENT" # not over ssh
 
             else if uname -a | string match --quiet --ignore-case --regex microsoft
                 __done_windows_notification "$title" "$message"
+
             else # anything else
                 echo -e "\a" # bell sound
             end
