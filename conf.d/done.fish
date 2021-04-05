@@ -245,6 +245,9 @@ if set -q __done_enabled
                 # override user-defined urgency level if non-zero exitstatus
                 if test $exit_status -ne 0
                     set urgency "critical"
+                    if set -q __done_notification_urgency_level_failure
+                        set urgency "$__done_notification_urgency_level_failure"
+                    end
                 end
 
                 notify-send --urgency=$urgency --icon=utilities-terminal --app-name=fish "$title" "$message"

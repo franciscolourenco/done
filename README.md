@@ -84,10 +84,11 @@ set -U __done_notify_sound 1
 set -U __done_sway_ignore_visible 1
 ```
 
-#### For Linux, set the urgency level for notifications sent via notify-send (low, normal, critical).
+#### For Linux, set the urgency level for notifications sent via notify-send (low, normal, critical). The default is "normal" for regular commands, and "critical" for failed commands.
 
 ```fish
-set -U __done_notification_urgency_level critical
+set -U __done_notification_urgency_level low
+set -U __done_notification_urgency_level_failure normal
 ```
 
 #### Allow notifications to be sent on systems without graphical capabilities. Note this requires you to also set `__done_notification_command`.
