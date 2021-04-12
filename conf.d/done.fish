@@ -106,14 +106,18 @@ end
 function __done_is_tmux_window_active
     set -q fish_pid; or set -l fish_pid %self
 
-    # If tmux is set to not run as a login shell,
-    # e.g. `set -g default-command "${SHELL}"` in tmux config,
-    # then the pane_pid will be parent pid of the current fish shell.
-    if status is-login
+    # Prior to fish 3.2.0, when tmux is set to not run as a login shell, e.g.
+    # `set -g default-command "${SHELL}"` in tmux config, then the pane_pid
+    # will be parent pid of the current fish shell.
+    set fish_version (string split . $FISH_VERSION)
+    if test $fish_version[1] -eq 3; and test $fish_version[2] -ge 2
+        set tmux_fish_pid $fish_pid
+    else if status is-login
         set tmux_fish_pid $fish_pid
     else
-        set tmux_fish_pid (ps -o ppid= -p $fish_pid)
+        set tmux_fish_pid (ps -o ppid= -p $fish_pid | string trim)
     end
+
     # tmux session attached and window is active -> no notification
     # all other combinations -> send notification
     tmux list-panes -a -F "#{session_attached} #{window_active} #{pane_pid}" | string match -q "1 1 $tmux_fish_pid"
