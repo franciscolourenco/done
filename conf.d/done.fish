@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-set -g __done_version 1.16.1
+set -g __done_version 1.16.2
 
 function __done_run_powershell_script
     set -l powershell_exe (command --search "powershell.exe")
@@ -40,7 +40,7 @@ function __done_run_powershell_script
     end
 end
 
-function __done_windows_notification -a "title" -a "message"
+function __done_windows_notification -a title -a message
     if test "$__done_notify_sound" -eq 1
         set soundopt "<audio silent=\"false\" src=\"ms-winsoundevent:Notification.Default\" />"
     else
@@ -78,7 +78,8 @@ function __done_get_focused_window_id
     else if test -n "$SWAYSOCK"
         and type -q jq
         swaymsg --type get_tree | jq '.. | objects | select(.focused == true) | .id'
-    else if begin test "$XDG_SESSION_DESKTOP" = gnome; and type -q gdbus
+    else if begin
+            test "$XDG_SESSION_DESKTOP" = gnome; and type -q gdbus
         end
         gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/Shell --method org.gnome.Shell.Eval 'global.display.focus_window.get_id()'
     else if type -q xprop
@@ -240,7 +241,7 @@ if set -q __done_enabled
 
             else if type -q notify-send # Linux notify-send
                 # set urgency to normal
-                set -l urgency "normal"
+                set -l urgency normal
 
                 # use user-defined urgency if set
                 if set -q __done_notification_urgency_level
@@ -248,7 +249,7 @@ if set -q __done_enabled
                 end
                 # override user-defined urgency level if non-zero exitstatus
                 if test $exit_status -ne 0
-                    set urgency "critical"
+                    set urgency critical
                     if set -q __done_notification_urgency_level_failure
                         set urgency "$__done_notification_urgency_level_failure"
                     end
