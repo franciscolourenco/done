@@ -20,6 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+status is-interactive || exit
+
 set -g __done_version 1.16.2
 
 function __done_run_powershell_script
