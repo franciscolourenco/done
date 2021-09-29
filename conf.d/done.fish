@@ -258,7 +258,7 @@ if set -q _done_enabled
 
                 # make notification auto-disappear
                 set -l transient ""
-                if "$__done_notification_transient" != 0
+                if test "$__done_notification_transient" -eq 1
                     set transient --hint=int:transient:1
                 end
                 
