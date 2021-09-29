@@ -20,7 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-set -g _done_version 1.16.3
+if not status is-interactive
+    exit
+end
+
+set -g __done_version 1.16.3
 
 function _done_run_powershell_script
     set -l powershell_exe (command --search "powershell.exe")
@@ -252,7 +256,13 @@ if set -q _done_enabled
                     end
                 end
 
-                notify-send --urgency=$urgency --icon=utilities-terminal --app-name=fish "$title" "$message"
+                # make notification auto-disappear
+                set -l transient ""
+                if "$__done_notification_transient" != 0
+                    set transient --hint=int:transient:1
+                end
+                
+                notify-send $transient --urgency=$urgency --icon=utilities-terminal --app-name=fish "$title" "$message"
 
                 if test "$_done_notify_sound" -eq 1
                     echo -e "\a" # bell sound
