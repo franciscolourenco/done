@@ -24,7 +24,7 @@ if not status is-interactive
     exit
 end
 
-set -g _done_version 1.16.3
+set -g _done_version 1.16.4
 
 function _done_run_powershell_script
     set -l powershell_exe (command --search "powershell.exe")
@@ -261,7 +261,7 @@ if set -q _done_enabled
                 if test "$__done_notification_transient" -eq 1
                     set transient --hint=int:transient:1
                 end
-                
+
                 notify-send $transient --urgency=$urgency --icon=utilities-terminal --app-name=fish "$title" "$message"
 
                 if test "$_done_notify_sound" -eq 1
