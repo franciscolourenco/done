@@ -194,6 +194,7 @@ if set -q __done_enabled
     set -q __done_exclude; or set -g __done_exclude 'git (?!push|pull|fetch)'
     set -q __done_notify_sound; or set -g __done_notify_sound 0
     set -q __done_sway_ignore_visible; or set -g __done_sway_ignore_visible 0
+    set -q __done_tmux_pane_format; or set -g __done_tmux_pane_format '[#{window_index}]'
 
     function __done_started --on-event fish_preexec
         set __done_initial_window_id (__done_get_focused_window_id)
@@ -223,7 +224,7 @@ if set -q __done_enabled
             end
 
 	    if test -n "$TMUX_PANE"
-		set message "["(tmux lsw  -F'#{window_id}' -f '#{==:#{pane_id},'$TMUX_PANE'}')"] $message"
+		set message (tmux lsw  -F"$__done_tmux_pane_format" -f '#{==:#{pane_id},'$TMUX_PANE'}')" $message"
 	    end
 
             if set -q __done_notification_command
