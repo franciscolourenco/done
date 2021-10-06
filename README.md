@@ -31,6 +31,14 @@ fisher install franciscolourenco/done
 curl -Lo ~/.config/fish/conf.d/done.fish --create-dirs https://raw.githubusercontent.com/franciscolourenco/done/master/conf.d/done.fish
 ```
 
+#### Arch Linux
+
+Install the `fish-done` package from AUR.
+
+```fish
+yay -S fish-done
+```
+
 ## Dependencies
 
 - If you want notifications with icons on macOS, please install `terminal-notifier` with
