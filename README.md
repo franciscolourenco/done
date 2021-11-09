@@ -111,7 +111,11 @@ set -U __done_notification_urgency_level_failure normal
 ```fish
 set -U __done_allow_nongraphical 1
 ```
+#### For Linux, set the timeout in milliseconds at which to expire the notification. The default is "0" (never expire).
 
+```fish
+set -U __done_expire_time 3000 # 3 seconds
+```
 ## Support
 
 - [fish](https://fishshell.com) 2.3.0+
