@@ -22,7 +22,7 @@ After installing you could type, for instance `sleep 6`, and start using other a
 #### Using [Fisher](https://github.com/jorgebucaran/fisher)
 
 ```fish
-fisher install franciscolourenco/done
+fisher add franciscolourenco/done
 ```
 
 #### Manually
