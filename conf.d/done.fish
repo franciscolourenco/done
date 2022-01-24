@@ -116,7 +116,7 @@ function __done_is_tmux_window_active
     # ppid == "tmux" -> break
     set tmux_fish_pid $fish_pid
     while set tmux_fish_ppid (ps -o ppid= -p $tmux_fish_pid | string trim)
-        and ! string match -q "tmux*" (basename (ps -o command= -p $tmux_fish_ppid))
+        and ! string match -q "tmux*" (basename (ps -o exe= -p $tmux_fish_ppid))
         set tmux_fish_pid $tmux_fish_ppid
     end
 
