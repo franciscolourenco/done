@@ -227,6 +227,9 @@ if set -q __done_enabled
                 if test "$__done_notify_sound" -eq 1
                     echo -e "\a" # bell sound
                 end
+            else if set -q KITTY_WINDOW_ID
+                printf "\x1b]99;i=done:d=0;$title\x1b\\"
+                printf "\x1b]99;i=done:d=1:p=body;$message\x1b\\"
             else if type -q terminal-notifier # https://github.com/julienXX/terminal-notifier
                 if test "$__done_notify_sound" -eq 1
                     terminal-notifier -message "$message" -title "$title" -sender "$__done_initial_window_id" -sound default
