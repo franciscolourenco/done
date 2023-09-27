@@ -24,7 +24,7 @@ if not status is-interactive
     exit
 end
 
-set -g __done_version 1.16.5
+set -g __done_version 1.17.0
 
 function __done_run_powershell_script
     set -l powershell_exe (command --search "powershell.exe")
