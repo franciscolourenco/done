@@ -238,9 +238,10 @@ if set -q __done_enabled
                 end
 
             else if type -q osascript # AppleScript
-                osascript -e "display notification \"$message\" with title \"$title\""
                 if test "$__done_notify_sound" -eq 1
-                    echo -e "\a" # bell sound
+                    osascript -e "display notification \"$message\" with title \"$title\" sound name \"Glass\""
+                else
+                    osascript -e "display notification \"$message\" with title \"$title\""
                 end
 
             else if type -q notify-send # Linux notify-send
