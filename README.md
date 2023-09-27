@@ -66,12 +66,19 @@ fisher update franciscolourenco/done
 set -U __done_min_cmd_duration 5000  # default: 5000 ms
 ```
 
-#### Prevent specific commands from triggering notifications. Accepts a regex.
+#### Prevent specific commands from triggering notifications.
 
-This is useful to exclude commands like `git commit` for instance, since it could trigger unwanted notifications if it is configured to use an external editor. This is also useful with `set -U __done_allow_nongraphical 1` to prevent notifications for commands normally run interactively that you do not want to get done notifications for.
+It accepts a list of regex patterns.
+This is useful to exclude commands like for instance `git commit`, since it could trigger unwanted notifications if it is configured to use an external editor. This is also useful with `set -U __done_allow_nongraphical 1` to prevent notifications for commands normally run interactively that you do not want to get done notifications for.
 
 ```fish
-set -U __done_exclude 'git (?!push|pull)'  # default: all git commands, except push and pull. accepts a regex.
+set -U __done_exclude '^git (?!push|pull|fetch)'  # default: all git commands, except push and pull. accepts a regex.
+```
+
+You can add more exclude patterns to the existing ones by using the `--append` option:
+
+```fish
+set -U --append __done_exclude '^emacsclient'
 ```
 
 #### Execute a custom command instead of showing the default notifications. The `done` notification title and message can also be passed.
