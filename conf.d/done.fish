@@ -248,6 +248,11 @@ if set -q __done_enabled
                 end
 
             else if type -q osascript # AppleScript
+                # escape double quotes that might exist in the message and break osascript. fixes #133
+                set -l message (string replace --all '"' '\"' "$message")
+                set -l title (string replace --all '"' '\"' "$title")
+
+                osascript -e "display notification \"$message\" with title \"$title\""
                 if test "$__done_notify_sound" -eq 1
                     osascript -e "display notification \"$message\" with title \"$title\" sound name \"Glass\""
                 else
