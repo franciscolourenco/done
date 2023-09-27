@@ -223,9 +223,9 @@ if set -q __done_enabled
                 set title "Failed ($exit_status) after $humanized_duration"
             end
 
-	    if test -n "$TMUX_PANE"
-		set message (tmux lsw  -F"$__done_tmux_pane_format" -f '#{==:#{pane_id},'$TMUX_PANE'}')" $message"
-	    end
+            if test -n "$TMUX_PANE"
+                set message (tmux lsw  -F"$__done_tmux_pane_format" -f '#{==:#{pane_id},'$TMUX_PANE'}')" $message"
+            end
 
             if set -q __done_notification_command
                 eval $__done_notification_command
