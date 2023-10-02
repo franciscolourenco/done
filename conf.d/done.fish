@@ -78,7 +78,7 @@ end
 
 function __done_get_focused_window_id
     if type -q lsappinfo
-        lsappinfo info -only bundleID (lsappinfo front) | cut -d '"' -f4
+        lsappinfo info -only bundleID (lsappinfo front | string replace 'ASN:0x0-' '0x') | cut -d '"' -f4
     else if test -n "$SWAYSOCK"
         and type -q jq
         swaymsg --type get_tree | jq '.. | objects | select(.focused == true) | .id'
