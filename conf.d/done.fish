@@ -248,9 +248,10 @@ if set -q __done_enabled
                 printf "\x1b]99;i=done:d=1:p=body;$message\x1b\\"
             else if type -q terminal-notifier # https://github.com/julienXX/terminal-notifier
                 if test "$__done_notify_sound" -eq 1
-                    terminal-notifier -message "$message" -title "$title" -sender "$__done_initial_window_id" -sound default
+                    # pipe message into terminal-notifier to avoid escaping issues (https://github.com/julienXX/terminal-notifier/issues/134). fixes #140
+                    echo "$message" | terminal-notifier -title "$title" -sender "$__done_initial_window_id" -sound default
                 else
-                    terminal-notifier -message "$message" -title "$title" -sender "$__done_initial_window_id"
+                    echo "$message" | terminal-notifier -title "$title" -sender "$__done_initial_window_id"
                 end
 
             else if type -q osascript # AppleScript
