@@ -111,10 +111,10 @@ set -U __done_notification_urgency_level_failure normal
 ```fish
 set -U __done_allow_nongraphical 1
 ```
-#### For Linux, set the timeout in milliseconds at which to expire the notification. The default is "0" (never expire).
+#### For Linux (except Ubuntu's Notify OSD), set the timeout in milliseconds at which to expire the notification. The default is "3000" (3 seconds). Set to "0" if you want it to never expire.
 
 ```fish
-set -U __done_expire_time 3000 # 3 seconds
+set -U __done_notification_duration 5000 # 5 seconds
 ```
 ## Support
 
