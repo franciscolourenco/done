@@ -137,6 +137,11 @@ function __done_is_process_window_focused
     if set -q __done_allow_nongraphical
         return 1
     end
+    
+    if set -q __done_kitty_remote_control
+        kitty @ --password="$__done_kitty_remote_control_password" ls | jq -e ".[].tabs.[] | select(any(.windows.[]; .is_self)) | .is_focused" > /dev/null
+        return $status
+    end
 
     set __done_focused_window_id (__done_get_focused_window_id)
     if test "$__done_sway_ignore_visible" -eq 1
