@@ -111,6 +111,25 @@ set -U __done_notification_urgency_level_failure normal
 ```fish
 set -U __done_allow_nongraphical 1
 ```
+
+#### Notifications are unavailable under Wayland. However, if you are using Kitty, you can enable it by using Kitty's remote control.
+
+You need to install jq (jqlang.github.io/jq).
+
+In kitty.conf (change "kitty-rc-password" to your liking):
+
+```conf
+remote_control_password "kitty-rc-password" ls
+allow_remote_control password
+```
+
+In fish
+
+```fish
+set -U __done_kitty_remote_control 1
+set -U __done_kitty_remote_control_password "kitty-rc-password"
+```
+
 #### For Linux (except Ubuntu's Notify OSD), set the timeout in milliseconds at which to expire the notification. The default is "3000" (3 seconds). Set to "0" if you want it to never expire.
 
 ```fish
