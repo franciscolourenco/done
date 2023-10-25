@@ -112,7 +112,14 @@ set -U __done_notification_urgency_level_failure normal
 set -U __done_allow_nongraphical 1
 ```
 
-#### Notifications are unavailable under Wayland. However, if you are using Kitty, you can enable it by using Kitty's remote control.
+
+#### Notifications are unavailable under Wayland. However, if you are using Kitty 0.31 or newer, you can use Kitty's own notification protocol.
+
+```fish
+set -U __done_kitty_notification_unfocused 1
+```
+
+##### If you are using an older version of Kitty, you can use Kitty's remote control protocol instead.
 
 You need to install [jq](https://jqlang.github.io/jq).
 

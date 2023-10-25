@@ -138,6 +138,10 @@ function __done_is_process_window_focused
         return 1
     end
 
+    if set -q __done_kitty_notification_unfocused
+        return 1
+    end
+
     if set -q __done_kitty_remote_control
         kitty @ --password="$__done_kitty_remote_control_password" ls | jq -e ".[].tabs.[] | select(any(.windows.[]; .is_self)) | .is_focused" >/dev/null
         return $status
@@ -250,7 +254,11 @@ if set -q __done_enabled
                     echo -e "\a" # bell sound
                 end
             else if set -q KITTY_WINDOW_ID
-                printf "\x1b]99;i=done:d=0;$title\x1b\\"
+                if set -q __done_kitty_notification_unfocused
+                    printf "\x1b]99;i=done:d=0:o=invisible;$title\x1b\\"
+                else
+                    printf "\x1b]99;i=done:d=0;$title\x1b\\"
+                end
                 printf "\x1b]99;i=done:d=1:p=body;$message\x1b\\"
             else if type -q terminal-notifier # https://github.com/julienXX/terminal-notifier
                 if test "$__done_notify_sound" -eq 1
