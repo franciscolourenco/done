@@ -47,7 +47,7 @@ yay -S fish-done
 brew install terminal-notifier
 ```
 
-- If you are using https://swaywm.org please install `jq`.
+- If you are using https://swaywm.org please install [jq](https://jqlang.github.io/jq).
 
 
 - If you are using Windows Subsystem for Linux (WSL) you may need to install [wslu](https://github.com/wslutilities/wslu), but usually it is pre-installed.
@@ -114,7 +114,7 @@ set -U __done_allow_nongraphical 1
 
 #### Notifications are unavailable under Wayland. However, if you are using Kitty, you can enable it by using Kitty's remote control.
 
-You need to install [jq](jqlang.github.io/jq).
+You need to install [jq](https://jqlang.github.io/jq).
 
 In kitty.conf (change "kitty-rc-password" to your liking):
 
