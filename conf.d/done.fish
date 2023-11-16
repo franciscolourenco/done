@@ -113,17 +113,29 @@ end
 function __done_is_tmux_window_active
     set -q fish_pid; or set -l fish_pid %self
 
-    # find the outermost process within tmux
-    # ppid != "tmux" -> pid = ppid
-    # ppid == "tmux" -> break
+    # Find the tmux PID that is the parent of the fish process
     set tmux_fish_pid $fish_pid
-    while set tmux_fish_ppid (ps -o ppid= -p $tmux_fish_pid | string trim)
-        and ! string match -q "tmux*" (basename (ps -o command= -p $tmux_fish_ppid))
+    while true
+        if test -e /proc/$tmux_fish_pid/status
+            # awk is used instead of ps with -o ppid= because the latter is not
+            # supported by busybox
+            set tmux_fish_ppid (awk '/PPid:/ {print $2}' /proc/$tmux_fish_pid/status)
+            set tmux_fish_ppid_cmd_full (busybox ps | awk "{if (\$1 == $tmux_fish_ppid) print \$NF}")
+            set tmux_fish_ppid_cmd (string split -m 1 / $tmux_fish_ppid_cmd_full)[-1]
+        else
+            break
+        end
+
+        if string match -q "tmux*" $tmux_fish_ppid_cmd
+            break
+        end
+
+        # If the parent is not tmux, keep looking
         set tmux_fish_pid $tmux_fish_ppid
     end
 
-    # tmux session attached and window is active -> no notification
-    # all other combinations -> send notification
+    # Check if the tmux session is attached and the window is active
+    # if so, the tmux window should be considered active
     tmux list-panes -a -F "#{session_attached} #{window_active} #{pane_pid}" | string match -q "1 1 $tmux_fish_pid"
 end
 
