@@ -118,7 +118,10 @@ function __done_is_tmux_window_active
     # ppid == "tmux" -> break
     set tmux_fish_pid $fish_pid
     while set tmux_fish_ppid (ps -o ppid= -p $tmux_fish_pid | string trim)
-        and ! string match -q "tmux*" (basename (ps -o command= -p $tmux_fish_ppid))
+        # remove leading hyphen so that basename does not treat it as an argument (e.g. -fish), and return only
+        # the actual command and not its arguments so that basename finds the correct command name.
+        # (e.g. '/usr/bin/tmux' from command '/usr/bin/tmux new-session -c /some/start/dir')
+        and ! string match -q "tmux*" (basename (ps -o command= -p $tmux_fish_ppid | string replace -r '^-' '' | string split ' ')[1])
         set tmux_fish_pid $tmux_fish_ppid
     end
 
