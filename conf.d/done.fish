@@ -83,7 +83,7 @@ function __done_get_focused_window_id
         and type -q jq
         swaymsg --type get_tree | jq '.. | objects | select(.focused == true) | .id'
     else if test -n "$HYPRLAND_INSTANCE_SIGNATURE"
-        hyprctl activewindow | awk 'NR==13 {print $2}'
+        hyprctl activewindow | awk 'NR==1 {print $2}'
     else if begin
             test "$XDG_SESSION_DESKTOP" = gnome; and type -q gdbus
         end
