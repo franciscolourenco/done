@@ -268,7 +268,6 @@ if set -q __done_enabled
                 set -l message (string replace --all '"' '\"' "$message")
                 set -l title (string replace --all '"' '\"' "$title")
 
-                osascript -e "display notification \"$message\" with title \"$title\""
                 if test "$__done_notify_sound" -eq 1
                     osascript -e "display notification \"$message\" with title \"$title\" sound name \"Glass\""
                 else
