@@ -47,7 +47,7 @@ yay -S fish-done
 brew install terminal-notifier
 ```
 
-- If you are using https://swaywm.org please install [jq](https://jqlang.github.io/jq).
+- If you are using https://swaywm.org or [niri](https://github.com/YaLTeR/niri), please install [jq](https://jqlang.github.io/jq).
 
 
 - If you are using Windows Subsystem for Linux (WSL) you may need to install [wslu](https://github.com/wslutilities/wslu), but usually it is pre-installed.
