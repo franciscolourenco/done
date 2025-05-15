@@ -27,12 +27,12 @@ end
 set -g __done_version 1.20.0
 
 function __done_run_powershell_script
-    set -l powershell_exe (command --search "powershell.exe")
+    set -f powershell_exe (command --search "powershell.exe")
 
     if test $status -ne 0
         and command --search wslvar
 
-        set -l powershell_exe (wslpath (wslvar windir)/System32/WindowsPowerShell/v1.0/powershell.exe)
+        set -f powershell_exe (wslpath (wslvar windir)/System32/WindowsPowerShell/v1.0/powershell.exe)
     end
 
     if string length --quiet "$powershell_exe"
