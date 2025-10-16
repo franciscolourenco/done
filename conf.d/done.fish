@@ -237,6 +237,13 @@ if set -q __done_enabled
                 end
             end
 
+            # don't notify if command was run in an excluded directory
+            for pattern in $__done_exclude_directory
+                if string match -qr -- $pattern (pwd)
+                    return
+                end
+            end
+
             # Store duration of last command
             set -l humanized_duration (__done_humanize_duration "$cmd_duration")
 
