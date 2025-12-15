@@ -226,7 +226,7 @@ if set -q __done_enabled
         # backwards compatibility for fish < v3.0
         set -q cmd_duration; or set -l cmd_duration $CMD_DURATION
 
-        if test "$cmd_duration"
+        if test -n "$cmd_duration"
             and test "$cmd_duration" -gt "$__done_min_cmd_duration" # longer than notify_duration
             and not __done_is_process_window_focused # process pane or window not focused
 
