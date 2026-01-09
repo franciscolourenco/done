@@ -215,6 +215,7 @@ if set -q __done_enabled
     set -q __done_sway_ignore_visible; or set -g __done_sway_ignore_visible 0
     set -q __done_tmux_pane_format; or set -g __done_tmux_pane_format '[#{window_index}]'
     set -q __done_notification_duration; or set -g __done_notification_duration 3000
+    set -q __done_notify_when_window_focused; or set -g __done_notify_when_window_focused 0
 
     function __done_started --on-event fish_preexec
         set __done_initial_window_id (__done_get_focused_window_id)
@@ -228,7 +229,8 @@ if set -q __done_enabled
 
         if test -n "$cmd_duration"
             and test "$cmd_duration" -gt "$__done_min_cmd_duration" # longer than notify_duration
-            and not __done_is_process_window_focused # process pane or window not focused
+            and test "$__done_notify_when_window_focused" -eq 1     # always notify, even when focused
+                or not __done_is_process_window_focused             # process pane or window not focused
 
             # don't notify if command matches exclude list
             for pattern in $__done_exclude
