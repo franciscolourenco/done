@@ -76,6 +76,18 @@ function __done_windows_notification -a title -a message
 "
 end
 
+function __done_can_get_window_id
+    # Lightweight capability check using only builtins and env vars.
+    # Avoids spawning subprocesses on every shell startup (~20ms on macOS).
+    type -q lsappinfo # macOS
+        or test -n "$SWAYSOCK" # Sway
+        or test -n "$HYPRLAND_INSTANCE_SIGNATURE" # Hyprland
+        or test -n "$NIRI_SOCKET" # Niri
+        or begin; test "$XDG_SESSION_DESKTOP" = gnome; and type -q gdbus; end # GNOME
+        or begin; type -q xprop; and test -n "$DISPLAY"; end # X11
+        or set -q __done_allow_nongraphical
+end
+
 function __done_get_focused_window_id
     if type -q lsappinfo
         lsappinfo info -only bundleID (lsappinfo front | string replace 'ASN:0x0-' '0x') | cut -d '"' -f4
@@ -200,8 +212,11 @@ function __done_humanize_duration -a milliseconds
 end
 
 # verify that the system has graphical capabilities before initializing
+# Use lightweight checks (builtins/env vars) instead of spawning subprocesses,
+# since this runs on every shell startup. The actual window ID is fetched
+# on-demand in __done_started and __done_is_process_window_focused.
 if test -z "$SSH_CLIENT" # not over ssh
-    and count (__done_get_focused_window_id) >/dev/null # is able to get window id
+    and __done_can_get_window_id
     set __done_enabled
 end
 
