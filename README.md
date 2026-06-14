@@ -93,6 +93,12 @@ set -U __done_notification_command "your-command \$title \$message"
 set -U __done_notify_sound 1
 ```
 
+#### Disable visibility checking to show notifications regardless of visibility
+
+```fish
+set -U __done_notify_when_window_focused 1
+```
+
 #### When using `sway`, do not show notifications for visible windows.
 
 ```fish
