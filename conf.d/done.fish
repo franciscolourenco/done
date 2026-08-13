@@ -201,7 +201,7 @@ end
 
 # verify that the system has graphical capabilities before initializing
 if test -z "$SSH_CLIENT" # not over ssh
-    and count (__done_get_focused_window_id) >/dev/null # is able to get window id
+    and count (__done_get_focused_window_id 2>/dev/null) >/dev/null # is able to get window id
     set __done_enabled
 end
 
