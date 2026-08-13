@@ -133,7 +133,9 @@ function __done_is_tmux_window_active
 
     # tmux session attached and window is active -> no notification
     # all other combinations -> send notification
-    tmux list-panes -a -F "#{session_attached} #{window_active} #{pane_pid}" | string match -q "1 1 $tmux_fish_pid"
+    tmux list-panes -a \
+        -F "#{session_attached} #{window_active} #{pane_active} #{pane_pid}" |
+        string match -q "1 1 1 $tmux_fish_pid"
 end
 
 function __done_is_screen_window_active
@@ -161,8 +163,9 @@ function __done_is_process_window_focused
         and test "$__done_initial_window_id" = (hyprctl activewindow | awk 'NR==1 {print $2}')
         return $status
     else if test -n "$NIRI_SOCKET"
-        and test "$__done_initial_window_id" = (niri msg --json focused-window | jq ".id")
-        return $status
+        if test "$__done_initial_window_id" != (niri msg --json focused-window | jq ".id")
+            return 1
+        end
     else if test "$__done_initial_window_id" != "$__done_focused_window_id"
         return 1
     end
