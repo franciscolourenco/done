@@ -181,3 +181,17 @@ Support this project with your organization. Your logo will show up here with a 
 ## License
 
 Done is MIT licensed. See [LICENSE](LICENSE) for details.
+
+### Terminal window ID cache
+
+Done remembers the first successful terminal window ID lookup at command start.
+Later commands reuse it, while long commands still check the current focus when
+they finish. Empty, failed, or known no-window results are retried on the next
+command. Inside tmux or screen, Done looks up the ID before every command because
+sessions can attach to different terminal windows.
+
+If you move an ordinary shell to another terminal window, run
+`set -g __done_initial_window_id ''` to repeat the lookup before the next command.
+The cache assumes the terminal window stays the same until you reset it.
+
+Run the targeted tests with `fish --no-config --interactive tests/window-cache.fish`.
