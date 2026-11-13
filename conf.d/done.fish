@@ -76,6 +76,22 @@ function __done_windows_notification -a title -a message
 "
 end
 
+function __done_can_get_window_id
+    # Lightweight capability check using only builtins and env vars.
+    # Avoids spawning subprocesses on every shell startup (~20ms on macOS).
+    # Must mirror the branches of __done_get_focused_window_id.
+    type -q lsappinfo; and return # macOS
+    test -n "$SWAYSOCK"; and type -q jq; and return # Sway
+    test -n "$HYPRLAND_INSTANCE_SIGNATURE"; and return # Hyprland
+    test -n "$NIRI_SOCKET"; and type -q jq; and return # Niri
+    test -n "$MANGO_INSTANCE_SIGNATURE"; and type -q jq; and return # Mango
+    test "$XDG_SESSION_DESKTOP" = gnome; and type -q gdbus; and return # GNOME
+    type -q xprop; and test -n "$DISPLAY"; and return # X11
+    set -q WSL_DISTRO_NAME; and return # WSL
+    test -e /proc/sys/fs/binfmt_misc/WSLInterop; and return # WSL when env is not inherited
+    set -q __done_allow_nongraphical
+end
+
 function __done_get_focused_window_id
     if type -q lsappinfo
         lsappinfo info -only bundleID (lsappinfo front | string replace 'ASN:0x0-' '0x') | cut -d '"' -f4
@@ -200,8 +216,11 @@ function __done_humanize_duration -a milliseconds
 end
 
 # verify that the system has graphical capabilities before initializing
+# Use lightweight checks (builtins/env vars) instead of spawning subprocesses,
+# since this runs on every shell startup. The actual window ID is fetched
+# on-demand in __done_started and __done_is_process_window_focused.
 if test -z "$SSH_CLIENT" # not over ssh
-    and count (__done_get_focused_window_id) >/dev/null # is able to get window id
+    and __done_can_get_window_id
     set __done_enabled
 end
 
@@ -340,6 +359,7 @@ function __done_uninstall -e done_uninstall
     functions -e __done_ended
     functions -e __done_started
     functions -e __done_get_focused_window_id
+    functions -e __done_can_get_window_id
     functions -e __done_is_tmux_window_active
     functions -e __done_is_screen_window_active
     functions -e __done_is_process_window_focused
