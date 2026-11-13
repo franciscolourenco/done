@@ -220,7 +220,16 @@ if set -q __done_enabled
     set -q __done_notification_duration; or set -g __done_notification_duration 3000
 
     function __done_started --on-event fish_preexec
-        set __done_initial_window_id (__done_get_focused_window_id)
+        # Multiplexer sessions can move between terminal windows.
+        if test -z "$__done_initial_window_id"; or test -n "$TMUX"; or test -n "$STY"
+            set -g __done_initial_window_id (__done_get_focused_window_id)
+            # Retry failed probes and backend responses meaning "no focused window".
+            if test $status -ne 0; or test (count $__done_initial_window_id) -ne 1
+                set -g __done_initial_window_id ''
+            else if string match -qr "^(\\s*|0+|0x0+|null|none|\\(false,.*|\\(true, '0'\\))\$" -- "$__done_initial_window_id"
+                set -g __done_initial_window_id ''
+            end
+        end
     end
 
     function __done_ended --on-event fish_postexec
