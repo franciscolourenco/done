@@ -135,6 +135,19 @@ set -U __done_kitty_remote_control_password "kitty-rc-password"
 ```fish
 set -U __done_notification_duration 5000 # 5 seconds
 ```
+
+#### The terminal window ID is fetched once per shell.
+
+Done remembers the first successful terminal window ID lookup at command start.
+Later commands reuse it, while long commands still check the current focus when
+they finish. Empty, failed, or known no-window results are retried on the next
+command. Inside tmux or screen, Done looks up the ID before every command because
+sessions can attach to different terminal windows.
+
+If you move an ordinary shell to another terminal window, run
+`set -g __done_initial_window_id ''` to repeat the lookup before the next command.
+The cache assumes the terminal window stays the same until you reset it.
+
 ## Support
 
 - [fish](https://fishshell.com) 2.3.0+

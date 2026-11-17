@@ -9,6 +9,22 @@ Please open an issue and discuss the problem / feature before starting to code.
 Keep the style consistent with existent code.
 
 
+## Tests
+
+The shell tests are run with [fishtape](https://github.com/jorgebucaran/fishtape):
+
+```console
+$ fishtape test/*.fish
+```
+
+The window ID cache has its own script, which needs an interactive shell
+because the plugin only loads in one:
+
+```console
+$ fish --no-config --interactive tests/window-cache.fish
+```
+
+
 ## Git Commit Messages
 
 Follow [the seven rules of a great git commit message](http://chris.beams.io/posts/git-commit/#seven-rules):
