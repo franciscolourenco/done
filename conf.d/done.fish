@@ -90,6 +90,9 @@ function __done_get_focused_window_id
     else if test -n "$MANGO_INSTANCE_SIGNATURE"
         and type -q jq
         mmsg get focusing-client | jq '.id'
+    else if test -n "$UMBRIEL_SOCKET"
+        and type -q jq
+        umbriel focused-window --json | jq ".id"
     else if begin
             test "$XDG_SESSION_DESKTOP" = gnome; and type -q gdbus
         end
@@ -162,6 +165,9 @@ function __done_is_process_window_focused
         return $status
     else if test -n "$NIRI_SOCKET"
         and test "$__done_initial_window_id" = (niri msg --json focused-window | jq ".id")
+        return $status
+    else if test -n "$UMBRIEL_SOCKET"
+        and test "$__done_initial_window_id" = (umbriel focused-window --json | jq ".id")
         return $status
     else if test "$__done_initial_window_id" != "$__done_focused_window_id"
         return 1
